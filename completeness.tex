@@ -1,0 +1,360 @@
+
+\section{Completeness of obstructions}
+\label{sec:completeness-of-obstructions}
+
+
+This section, which is the technical core of the paper, is devoted to proving  completeness of obstructions, as stated in the following lemma.
+\begin{lemma}\label{lem:completeness-of-obstructions}
+    Let $\Cc$ be an orbit-finitely generated category. If $\Cc$ is not orbit-finite, then it has an obstruction.
+\end{lemma}
+
+
+
+\subsection{The induction paramter}
+\label{sec:induction-parameter}
+The completeness proof is by on induction on a certain parameter. This section is devoted to defining this parameter, and establishing some of its basic properties. This parameter is called the signature of a set, and it consists of the dimension of the set, together with a secondary parameter that is called the degree, and which is defined below.
+
+
+\begin{definition}[Degree and signature]
+    Let $X$ be an orbit-finite set.
+    \begin{itemize}
+        \item The \emph{degree} of $X$ is the maximal number of disjoint subsets of dimension $\dim X$.
+        \item The \emph{signature} of $X$ is the pair $(\dim X, \deg X)$.
+    \end{itemize}
+ We order degrees lexicographically, with the dimension more important than the degree.
+\end{definition}
+
+    A one orbit set has degree one, and degrees are added when taking disjoint unions of sets of same dimension. Therefore, every orbit-finite set has a defined degree.
+As we have mentioned before, the dimension of an orbit-finite set corresponds to its Morley rank. The degree above coincides with the usual notion of degree in the context of Morley rank.
+
+\paragraph*{The induction parameter.} We are now ready to define the induction parameter for the completeness proof.
+For a function between two orbit-finite sets, its \emph{image signature} is defined to be the signature of its image. In our completeness proof, the induction parameter will be the upper bound on image signatures of morphisms. There is a minor caveat: we exclude identity morphisms, since otherwise we would be simply talking about signatures of the objects in the category.
+
+\begin{definition}[Induction parameter]
+    The \emph{induction parameter} of an orbit-finitely generated category $\Cc$ is defined to be the least pair $(d,k)$ such that for all non-identity morphisms in the category, the signature of the image is at most $(d,k)$.
+\end{definition}
+
+Let us first argue that the induction parameter is well-defined. Let $d$ be the maximal dimension of objects in the category. This dimension gives us an upper bound on the induction parameter, namely $(d+1,1)$. Therefore, there is some upper bound. 
+Since signatures form a well-order, there is also a  least upper bound, and hence the induction parameter is well-defined.  
+
+We have just argued that there is some least upper bound. However, one could imagine that this least upper bound is not achieved by any single morphism. For example, one could imagine that there are morphisms with arbitrarily large finite images (i.e.~image signatures of the form $(0,k)$ for arbitrarily large $k$),  but there is no morphism with an infinite image. In such a case, the least upper bound would be $(1,1)$, but it would not be achieved by any morphism. This cannot happen, however, in an orbit-finitely generated category, as shown in the following lemma. 
+
+\begin{lemma}\label{lem:maximal-image-signature}
+    Let $\Cc$ be an orbit-finitely generated category. Then the induction parameter is achieved by some morphism.
+\end{lemma}
+\begin{proof} In fact, we will show that every set of generators contains a morphism which achieves the induction parameter
+    
+    
+Consider any orbit-finite set of generators. We assume that the set of generators does not use any identity morphisms, since these can be removed without affecting the generated set.  
+Since the signature is an atom-less object, there are finitely many possible image signatures used by the generators. Therefore, the maximal image  signature among generators is achieved by some generator.     Consider  any non-identity morphism in the category, and decompose it into generators  
+    \begin{align*}
+     f = f_1  \cdots f_n. 
+    \end{align*}
+The image of $f$ is contained in the image of the last generator, and therefore the image signature of $f$ is at most the image signature of the last generator. 
+\end{proof}
+
+
+In the proof of the above lemma, we used the fact that the image signature of a composition $f_1 \cdots f_n$ is bounded by the image signature of the last morphism $f_n$. We could have also used the first morphism. This is thanks to the following lemma (that will be used later on), which shows that the signature can only go down when applying  a finitely supported function. 
+\begin{lemma}\label{lem:signature-decrease-across-functions}
+    If $f : X \to Y$ is a finitely supported function between orbit-finite sets, then the signature of $X$ is  bigger or equal to the signature of the image $f(Y)$.
+\end{lemma}
+\begin{proof}
+    (simple proof)
+\end{proof}
+
+
+
+
+\paragraph*{Induction base.}
+We finish this section with a proof of the induction base. Technically speaking, the induction base is for signature $(0,1)$, i.e.~then all images are finite sets of size one. In this case, a morphism is nothing but a choice of an element in the target object, and clearly there are orbit-finitely many ways to define such morphisms. Therefore, obstructions are complete in this case for vacuous reasons, namely that the category is necessarily orbit-finite and there is no need to use obstructions. 
+A similar argument works when the dimension is $0$, but the degree is any finite number, as shown in the following lemma. 
+\begin{lemma}\label{lem:induction-basis}
+        If the induction parameter uses dimension $0$, and any degree $n$, then the category is necessarily orbit-finite, and therefore the obstructions are complete.
+\end{lemma}
+\begin{proof}
+    A set of signature $(0,n)$ is a finite set with $n$ elements. Therefore, every generator has a finite image, which has at most $n$ elements. Consider a morphism along with a decomposition into generators
+    \begin{align*}
+     f = f_1; \cdots ; f_n.     
+    \end{align*}
+    This morphism is uniquely determined by two pieces of information: (a) the first generator $f_2$; and (b) what the composition $f_2;\cdots ; f_n$ of the remaining generators does to the at most $n$ atoms in the image of $f_1$. This information can be chosen in orbit-finitely many ways. 
+\end{proof}
+
+The rest of this section is devoted to proving the induction step in the completeness result from \cref{lem:completeness-of-obstructions}.
+Thanks to \cref{lem:induction-basis}, when proving the induction basis we can assume that the dimension is nonzero in the induction parameter.
+
+\subsection{Annotations}
+\label{sec:annotations}
+In this subsection, we define annotations, which are a crucial notion in our completeness proof.  The idea is that an annotation tracks  the images of maximal signature.
+
+
+
+
+\begin{definition}[Annotation] 
+            Let $\Cc$ be an orbit-finitely generated category whose induction parameter is a signature $\sigma$. Let $D$ be a map which associates to each object $X$ in $\Cc$ an orbit-finite family of distinguished  subsets of signature $\sigma$.
+            The \emph{annotation} of $\Cc$ with respect to the map $D$ is the following category.
+    \begin{itemize}
+    \item \textbf{Objects.} Objects are pairs $X \supseteq X'$, where $X'$ is a distinguished subset in $D(X)$.
+    \item \textbf{Morphisms.} For two objects  $X \supseteq X'$ and $Y' \subseteq X$, the morphisms between them  are exactly those morphisms $f : X \to Y$ from the original category $\Cc$ such that 
+    the image $f(X)$ is equivalent to $Y$.
+\end{itemize}
+An \emph{annotation of $\Cc$} is any annotation that arises from some finitely supported map $D$.
+ \end{definition}
+
+ We want the map $D$ to produce orbit-finite families of sets. For this reason, we cannot simply use $D(X)$ to be all subsets of signature $\sigma$, since this family can be orbit-infinite (in fact, it will always be orbit-infinite if the dimension is nonzero, and there is at least one set of given signature). Since there does not seem to be any canonical way of choosing the distinguished subsets, we make the map $D$ a part of the definition.  The following lemma shows that the annotation can be chosen so that the distinguished subsets represent all possible subsets of signature $\sigma$, up to equivalence.
+
+\begin{lemma}\label{lem:complete-annotation-exists}
+    Every orbit-finitely generated category $\Cc$ has  an  annotation which is complete in the following sense: for every object in $X$, every subset $X' \subseteq X$ of signature $\sigma$ is equivalent to some subset in $D(X)$.
+\end{lemma}
+\begin{proof}
+    To prove the lemma, we only need to define the map $D$, which has the corresponding completeness property. To find such a map, we will use the following claim, which gives a uniform upper bound on the supports needed to represent all subsets with given signature.
+
+    \begin{claim}\label{claim:bound-on-support-size-for-representatives}
+        Let $\sigma$ be a signature, and let $X$ be an orbit-finite set. Every subset of $X$ that has signature $\sigma$ is equivalent to some subset that has a support of size at most
+        \begin{align*}
+        \text{(support size of $X$)} + \text{(maximal support size of $x \in X$)} \cdot \text{(degree in $\sigma$)}.
+        \end{align*} 
+    \end{claim}
+\begin{proof}
+    Let $n$ be the maximal support size mentioned in the claim.
+    Each one-orbit set of dimension $d$ is described by fixing at most $n$ atoms, and letting the remaining ones range over free atoms, with some atoms prohibited. The  prohibited  atoms can be chosen to be those from the least support of $X$, without affecting the set, up to equivalence. Therefore, every one-orbit subset of $X$ is  equivalent to one that has a support which consists of the least support of $X$, plus at most $n$ additional atoms. This gives the claim, since $n$ is multiplied by the number of orbits, which is the degree of $\sigma$
+\end{proof}
+    Since the support size of objects in $\Cc$ is uniformly bounded, it follows that there is some uniform bound $N$, such that for every object in $X$, every subset of signature $\sigma$ is equivalent to some subset that has a support of size at most $N$. Therefore, we can define $D(X)$ to be all subsets of $X$ that have signature $\sigma$, and which have a support of size at most $N$. Since the number of subsets with a given support is finite, it follows that for each $X$, the family $D(X)$ is orbit-finite. 
+\end{proof}
+
+As mentioned before, the construction in the above lemma is not canonical in any way, which is why we do not insist on any particular annotation, as long as it is complete. The general strategy behind our completeness proof is that to reduce the search for obstructions to the special case of the annotation.  Since our completeness proof deals with orbit-finitely generated categories, we need to show that annotations are orbit-finitely generated. This is proved in the following lemma.
+
+
+
+\begin{lemma}\label{lem:annotation-orbit-finitely-generated}
+    If $\Cc$ is orbit-finitely generated, and let $\Dd$ be a complete annotation. Then there is an orbit-finite set of morphisms in $\Dd$ which generates all morphisms.
+\end{lemma}
+
+Before proving the lemma, let us first discuss a minor technical issue. 
+The conclusion of the lemma does not say that $\Dd$ is orbit-finitely generated, since the definition of an orbit-finitely generated category, see Definition~\ref{def:orbit-finitely-generated-category},  requires the category to be sub-category of the category of orbit-finite set. However, technically speaking this is not the case for the annotation, since the annotation will use the same underlying set $X$ for different objects, corresponding to different choices of distinguished sets.  This issue is easily resolved, since we can always use isomorphic copies of the objects in the annotation. From now on, we ignore this issue, and we think of the annotation as an orbit-finitely generated category, in the sense of Definition~\ref{def:orbit-finitely-generated-category}. (Formally speaking, each annotation is isomorphic to such a category, under a finitely supported isomorphism of categories.)
+
+\begin{proof}[Proof of Lemma~\ref{lem:annotation-orbit-finitely-generated}]
+
+    Let $\sigma$ be the signature of $\Cc$. 
+    For every annotation, there is a natural functor from the annotation to the original category, which forgets the  distinguished subsets. We call this the \emph{forgetful functor} of the annotation. For a morphism in $\Cc$, define a \emph{lifting} to be any morphism in the annotation which projects to it along the forgetful functor. 
+
+
+
+As a generating subset of the annotation, we propose the liftings of the generators of $\Cc$  (for some orbit-finite choice of generators). This set is orbit-finite, since every morphism in $\Cc$ can be lifted to at most orbit-finitely many morphisms in the annotation,  which correspond to the orbit-finitely many choices of distinguished subsets. 
+
+It remains to show that the proposed set generates the annotation. 
+Consider a morphism in the annotation 
+\[
+\begin{tikzcd}
+X \subseteq X'
+\ar[r,"f"] & 
+Y \subseteq Y'.
+\end{tikzcd}
+\]
+Decompose the function $f$ into generators in the category $\Cc$:
+    \[
+\begin{tikzcd}
+X = Z_0 \ar[r,"f_1"] & 
+Z_1 \ar[r,"f_2"] &
+\cdots 
+\ar[r,"f_n"]
+&  Z_n = Y.
+\end{tikzcd}
+\]
+By definition of the annotation, we know that $f$ maps the distinguished subset $X'$ to a set equivalent to the distinguished  $Y'$. For $i \in \set{0,1,\ldots,n}$, define $Z'_i \subseteq Z_i$ to be the image of $X'$ under the first $i$ morphisms. We know that all of these sets have signature $\sigma$, since the first and last sets have this signature, and the signature can only go down when applying a morphism. Therefore, by completeness, the annotation contains sets which are equivalent to these distinguished sets. Summing up, we have decomposed the original morphism into a composition of liftings of generators. 
+\end{proof}
+
+
+The point of annotations is that we can reduce the search for obstructions to them, as shown in the following lemma. 
+
+\begin{lemma}\label{lem:there-must-be-an-obstruction-or-annotation}
+        Let $\Cc$ be an orbit-finitely generated category, and assume that completeness of obstructions holds for categories of strictly smaller  induction parameter. 
+ If $\Cc$ is orbit-infinite then it either  contains an obstruction, or it has an annotation that is orbit-infinite. 
+\end{lemma}
+\begin{proof}
+    We want to show that if every annotation is orbit-finite, then there is an obstruction in $\Cc$. 
+    In fact, it will enough to assume that some complete annotation $\Dd$ is orbit-finite.  Let $\sigma$ be the induction parameter of $\Cc$. We use the forgetful functor and liftings that were introduced in the proof of the previous lemma. 
+
+    \begin{claim}\label{claim:liftings-witness-image-signature}
+    Every morphism of $\Cc$ with signature $\sigma$ lifts to some morphism in the annotation. 
+\end{claim}
+\begin{proof}
+Let $f : X \to Y$ be a morphism in $\Cc$ of signature $\sigma$. The essential observation is that one  can choose a subset $X' \subseteq X$  such that both $X'$ and its image $f(X')$ have signature $\sigma$. 
+Indeed, for  each orbit in the image of $f$, we can  choose an orbit of same dimension in its preimage. By completeness of the annotation, we can find distinguished subsets equivalent to $X'$ and its image in the annotation.
+\end{proof}
+
+    Define two sets of morphisms in $\Cc$:
+    \begin{itemize}
+        \item $\Gamma_{\sigma}$ are the morphisms that have  image signature $\sigma$;
+        \item $\Gamma_{<\sigma}$ are the  generators that image signature strictly smaller than $\sigma$.
+    \end{itemize}
+
+By \cref{claim:liftings-witness-image-signature}, every morphism in the first set $\Gamma_\sigma$ lifts to a morphism in the annotation, and since the annotation is assumed to be orbit-finite, it follows that the set $\Gamma_\sigma$ is orbit-finite. (Here we use the fact that the forgetful functions is faithful, i.e.~one cannot find two different morphisms in $\Cc$ with the same lifting.) The second set $\Gamma_{<\sigma}$ is orbit-finite, since it is a subset of the generators, which are orbit-finite by assumption.
+
+
+    If we take the category $\generate{\Gamma_{<\sigma}}$ generated by the second set, then it has a strictly smaller induction parameter than $\Cc$, thanks to \cref{lem:signature-decrease-across-functions}. Therefore, we can apply the induction assumption to it and conclude that either it contains an obstruction -- in which case we are done -- or it is orbit-finite. From now on we assume that $\generate{\Gamma_{<\sigma}}$ is orbit-finite. 
+
+    Every morphism in the category $\Cc$ can be decomposed into a composition which alternates between morphisms from $\Gamma_{\sigma}$ and from $\generate{\Gamma_{<\sigma}}$. Therefore, every morphism in the category belongs to either  $\Gamma_{\sigma}$, or it is generated by the orbit-finite set
+    \begin{align*}
+            \Gamma = (\Gamma_{\sigma} \cup \text{(identity morphisms)}) \cdot \generate{\Gamma_{<\sigma}} \cdot (\Gamma_{\sigma} \cup \text{(identity morphisms)}).
+    \end{align*} 
+    Since $\Gamma_{\sigma}$ is orbit-finite, it follows that the only way for $\Cc$ to be orbit-infinite is if the set generated by $\Gamma$ is orbit-finite. Since $\Gamma$ has a strictly smaller induction parameter than $\Cc$, we can use the induction assumption to conclude that the category generated by it has an obstruction. 
+\end{proof}
+
+
+\subsection{Weakly consistent annotations}
+\label{sec:weakly-consistent-annotations}
+
+In this section, we show that we can reduce the search for obstructions to annotations in which for any two objects, every two morphisms between these two objects agree on fresh distinguished elements, as described in the following definition.
+
+
+\begin{definition}[Weak consistency]
+    \label{def:weak-consistency}
+    Let $\Cc$ be an orbit-finitely generated category, and let $\Dd$ be an annotation. We say that $\Dd$ is \emph{weakly consistent} if every two morphisms in the same hom-set 
+    \[
+    \begin{tikzcd}
+    X \supseteq X' \ar[r, bend left, "f"]
+    \ar[r, bend right, "g"'] & Y \supseteq Y'
+    \end{tikzcd}
+    \]
+    agree on the distinguished subset up to a set of strictly smaller rank, i.e.~
+    \begin{align*}
+     \setbuild{ x \in X'}{ $f(x) \neq f(x)$}  \sim X'.
+    \end{align*}
+\end{definition}
+
+We use the name ``weak'' because in the  next subsection, we  will consider a stronger notion of consistency, where the morphisms must agree on all distinguished elements, not just on a set of strictly smaller rank. 
+
+The main result of this subsection is the following lemma, which shows that the search for obstructions can be reduced to weakly consistent annotations.
+\begin{lemma}\label{lem:complete-annotation-exists-weakly-consistent}
+    Let $\Cc$ be an orbit-finitely generated category.
+    If some  annotation of $\Cc$ is orbit-infinite, then some  annotation is orbit-infinite and weakly consistent.
+\end{lemma}
+
+\begin{proof}
+    Let $\Dd$ be an annotation that is orbit-infinite. Define $\approx$ to be the equivalence relation on morphisms in $\Dd$, which identifies two morphisms if they have the same 
+    source and target objects,  and  furthermore the two morphisms agree on fresh elements of the distinguished subset in the source. Weak consistency means that every hom-set has one equivalence class.  The main observation is the following claim, which shows that the equivalence relation $\approx$ can be described by a finite group. 
+
+    \begin{claim}\label{claim:equivalence-relation-finite-group}
+        There is a finite group $\Gg$ and a functor $F : \Ee \to \Gg$
+        such that two morphisms are equivalent under $\approx$ if and only if they have the same source/target objects, and the same image under $F$.
+    \end{claim}
+    \begin{proof}
+        (sketch) The group describes how the fresh atoms are moved around by the morphisms.
+    \end{proof}
+
+    After applying the FFT Lemma, we get an orbit-infinite annotation where all morphisms are mapped to the group identity. In particular, all morphisms with the same source/target objects are equivalent under $\approx$, as required in a weakly consistent annotation.
+\end{proof}
+
+\subsection{Strongly consistent annotations}
+\label{sec:strongly-consistent-annotations}
+So far we have reduced the search for obstructions to weakly consistent annotations. Recall that in a weakly consistent annotation, every two morphisms in the same hom-set agree on the distinguished elements, up to a set of smaller rank. We now introduce a stronger notion of consistency, where all morphisms in the same hom-set must agree on all distinguished elements, not just on a set of smaller rank. 
+
+
+\begin{definition}[Strong consistency]
+    \label{def:strong-consistency}
+    Let $\Cc$ be an orbit-finitely generated category, and let $\Dd$ be an annotation. We say that $\Dd$ is \emph{strongly consistent} if every two morphisms in the same hom-set 
+    \[
+    \begin{tikzcd}
+    X \supseteq X' \ar[r, bend left, "f"]
+    \ar[r, bend right, "g"'] & Y \supseteq Y'
+    \end{tikzcd}
+    \]
+    agree on all elements in the distinguished subset $X'$, and furthermore the restriction of either of these two functions to $X'$ is a bijection between $X'$ and $Y'$. 
+\end{definition}
+
+
+
+The main result of this subsection is the following lemma, which shows that a strongly consistent annotation can be found, or otherwise there is an obstruction.
+
+\begin{lemma}\label{lem:if-not-stringly-consistent-then-obstruction}
+    Let $\Cc$ be an orbit-finitely generated category. If some annotation of $\Cc$ is orbit-infinite, then either there is an obstruction in $\Cc$, or otherwise there is an annotation that  is orbit-infinite and strongly consistent.  
+\end{lemma}
+\begin{proof}
+    (TODO) this is the remaining part of the proof. We might need to identify more obstructions.
+\end{proof}
+
+
+\subsection{Eliminating the distinguished subset}
+\label{sec:reductions}
+
+In this section, we complete the proof of the induction step for completeness of obstructions. By \cref{lem:if-not-stringly-consistent-then-obstruction}, we can assume that there is a strongly consistent annotation. The idea is to reduce the morphisms in the annotation to a smaller set, which will allow us to apply the induction assumption.
+
+Consider an annotation $\Dd$ of an orbit-finitely generated category. For a morphism 
+\[
+\begin{tikzcd}
+X \supseteq X' \ar[r, "f"] & Y \supseteq Y'
+\end{tikzcd}
+\]
+in $\Dd$ we define two partial functions from $X$ to $Y$, which are called its \emph{inner} and \emph{outer} restrictions, as follows:
+\begin{enumerate}
+    \item inner: restrict $f$ by making it undefined on elements outside $X'$;
+    \item outer: restrict $f$ by making it undefined on elements mapped to $Y'$.
+\end{enumerate}
+By definition, the image of the inner restriction is contained in $Y'$, and the image of the outer restriction is disjoint with $Y'$. We can view the two kinds of restrictions as two categories, where the objects are the same as in $\Dd$, but the morphisms are partial functions that arise from the corresponding restrictions.
+
+
+
+\begin{definition}
+    [Reduction] Consider a morphism 
+  \[
+        \begin{tikzcd}
+        X \supseteq X' \ar[r, "f"] & Y \supseteq Y',
+        \end{tikzcd}
+        \]
+in an annotation. Define the \emph{reduction} of this morphism to  the partial function of type $X \to Y$ that is obtained from $f$ by making it undefined on elements with image in the distinguished subset $Y'$. 
+\end{definition}
+By definition, the range of the reduction does not use any elements of the distinguished subset. Since the distinguished subset agrees with the image up to equivalence, it follows that the image of the reduction  has strictly smaller dimension than the image of $f$.  Therefore, we for reductions we will be able to apply the induction assumption. (There is a minor technical issue, which is that the reduction is a partial function, while we work with total functions. This issue will be resolved when we work with the reductions.) The following lemma shows that, when the annotation is strongly consistent, the orbit-infinity must manifest itself in the reductions. 
+
+\begin{lemma}\label{lem:reductions-orbit-infinite}
+    Let $\Cc$ be an orbit-finitely generated category which has an annotation $\Dd$ that is orbit-infinite and strongly consistent. Then the reduction of $\Dd$  is orbit-infinite. 
+\end{lemma}
+\begin{proof}
+    We will prove the contrapositive: if the set of reductions is orbit-finite, then $\Dd$ is orbit-finite. Assume that the set of reductions is orbit-finite. 
+
+    We think of the reductions as a category, where the objects are the same as in $\Dd$, and the morphisms are reductions.
+    Define the domain of a reduction to be the set of arguments for which the reduction is defined. Let $\Xx$ be the set of possible domains of all reductions in the annotation $\Dd$. This is an orbit-finite family of sets, by the assumption that the set of reductions is orbit-finite. The following claim shows that such a family has a finite upper bound on the maximal length of strictly increasing chains.
+
+
+            \begin{claim}\label{claim:chains-bounded}
+            Let $\Xx$ be an orbit-finite family of orbit-finite sets. Then there is some finite upper bound $N$ on the maximal length of strictly increasing chains
+            \begin{align*}
+            X_1 \subsetneq X_1 \subsetneq \cdots \subsetneq X_n 
+            \qquad 
+            \text{where $X_1,\ldots,X_n \in \Xx$.}
+            \end{align*}
+        \end{claim}
+        \begin{proof}
+            Consider the function which maps a set $X \in \Xx$ to the maximal length of a strictly increasing chain which starts in $X$. This function has atom-less outputs, namely natural numbers, and therefore it can have only finitely many possible outputs on the orbit-finite family $\Xx$. 
+        \end{proof}
+
+        Consider a path $f_1; \cdots f_n$ in the category of reductions. Define a \emph{domain drop} for this path to be an index $i$ such that the domain of the prefix $f_1 \cdots f_{i-1}$ is different (and therefore strictly larger) than the domain of the prefix $f_1 \cdots f_i$. By the above claim, we know that there is a finite upper bound $N$ on the number of domain drops in any path in the category of reductions.
+
+        \begin{claim}
+                Consider a path in the category $\Dd$. The morphism obtained by composing this path  is uniquely determined by the following data:
+     \begin{enumerate}
+        \item the number  of domain drops in the reduction of the path;
+        \item the generators used by the path at indices that are domain drops;
+        \item the reductions of the  segments of the path  between consecutive domain drops.
+     \end{enumerate}
+        \end{claim}
+        \begin{proof}
+            (sketch) Between consecutive domain drops, the path cannot put an element into the distinguished subset which was not already put there previously in the path. Therefore, in a segment between consecutive domain drops, the reduction of the corresponding morphisms stores all relevant information. 
+        \end{proof}
+
+    By Claim~\ref{claim:chains-bounded}, the number of domain drops in a path is uniformly bounded. Furthermore, for each segment, the corresponding reduction can be chosen in orbit-finitely many ways, by the assumption that the reduced category is orbit-finite. Therefore, the information in the above claim can be chosen in orbit-finitely many ways. Therefore, the set of morphisms in the category $\Dd$ of reductions is orbit-finite.
+\end{proof}
+
+
+We have now collected all the ingredients needed to prove the induction step for  completeness of obstructions, as stated in the following lemma.
+\begin{lemma}\label{lem:completeness-of-obstructions-induction-step}
+    Let $\Cc$ be an orbit-finitely generated category, and assume that completeness of obstructions holds for categories of strictly smaller induction parameter. If $\Cc$ is orbit-infinite, it contains an obstruction.
+\end{lemma}
+\begin{proof}
+    By \cref{lem:there-must-be-an-obstruction-or-annotation}, either $\Cc$ has an obstruction, or there is an annotation that is orbit-infinite. In the first case we are done, so we assume that the annotation is orbit-infinite.  By \cref{lem:if-not-stringly-consistent-then-obstruction}, either there is an obstruction in $\Cc$, or there is an annotation that is orbit-infinite and strongly consistent. In the first case we are done, so we assume that the annotation is orbit-infinite and strongly consistent. By \cref{lem:reductions-orbit-infinite}, the set of reductions of this annotation is orbit-infinite. In the process of reduction, we made the morphisms into partial functions, in a way which removes the distinguished subset from the image. As mentioned before, there is a minor technical issue, which is turning the partial functions into total functions. This is addressed by viewing a partial function 
+of type $X \to Y$ as a total function of type $X+1 \to Y+1$. (We use the name \emph{totalization} for the latter function.) By applying totalization to the reductions, we obtain a category of total functions, which is orbit-finitely generated and orbit-infinite. Furthermore, the induction parameter improves (assuming that the dimension in the original induction parameter was nonzero), since we have removed the distinguished subset from the image, and replaced it by a single element. Therefore, we can apply the induction assumption to get an obstruction in the totalizations of the reductions. This obstruction easily pulls back to the original category, thus completing the proof of the lemma.
+\end{proof}
+
+
+
+
+

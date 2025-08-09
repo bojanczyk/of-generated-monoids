@@ -1,0 +1,291 @@
+\section{Obstructions}
+\label{sec:obstructions}
+
+\newcommand{\fsfun}{\underset {\text{fs}} \longrightarrow}
+\newcommand{\smallfsfun}{\to_{\text{fs}}}
+\begin{definition}[Obstruction]
+    Let $Q$ be an orbit-finite set, and let $M$ be a finitely supported  submonoid of $Q \smallfsfun Q$.
+    An \emph{obstruction} for $M$ consists of 
+    \begin{itemize}
+        \item a finite support $S \subseteq \atoms$ which supports $M$;
+        \item a function $f \in M$;
+        \item an argument $x$
+    \end{itemize}
+    with the following properties:
+    \begin{enumerate}
+        \item $f$ is the identity on fresh elements in the  $S$-orbit of  $X$;
+        \item $f(x) \neq x$ and one of the following conditions holds: 
+        \begin{enumerate}[(a)]
+            \item $f$ is  the identity on fresh elements in the $S$-orbit of $f(x)$; or 
+            \item there is some atom in $\sup(x)$ that is neither in $S$ nor in $\sup(f(x))$. 
+        \end{enumerate}
+    \end{enumerate}
+\end{definition}
+
+In the above definition, there is a disjunction between items (a) and (b). Depending on which item is satisfied, we will speak of an obstruction of type (a) or (b). In principle, both types could hold at once.
+
+The main technical result of this paper will be that obstructions are a necessary and sufficient condition for a monoid being orbit-infinite, as stated in the following theorem. 
+
+
+\begin{theorem}\label{thm:obstructions-sound-and-complete}
+    Let $Q$ be an orbit-finite set, and let $M$ be a finitely supported submonoid of $Q \smallfsfun Q$.
+    Then $M$ is not orbit-finite if and only if it has an obstruction.
+\end{theorem}
+
+ Before discussing this further, let us give examples of both types of obstructions.
+ 
+
+\begin{myexample}[Obstruction of type (a)] In this example, the domain $Q$ is the set $\atoms$ of all atoms, and the monoid consists of all finitely supported permutations. This monoid is orbit-infinite. Indeed, 
+a finitely supported permutation can only move finitely many atoms, and the number of atoms moved in an orbit invariant, i.e.~two permutations that move different numbers of atoms are in different orbits.
+
+As we mentioned above, if a monoid is orbit-infinite, then it must have an obstruction. Here is the obstruction, which is of type (a), for this example. The support $S$ is empty, the function $f$ is a transposition of two atoms $a$ and $b$, and the argument $x$ is one of the transposed atoms, say $x=a$.  
+\begin{enumerate}
+    \item   The first condition in the definition of an obstruction says  that $f$ is the identity on fresh elements in the $S$-orbit of $x$. In this case, this orbit is the entire domain $\atoms$. Since $f$ is a transposition, it is indeed the identity on fresh atoms. 
+    \item  The second condition says that $f(x) \neq x$, which is clearly true, and that $f$ is the identity on fresh elements in the $S$-orbit of $f(x)$. In this case, the $S$-orbit of $f(x)$ is again the entire domain $\atoms$, and we have already argued that $f$ is the identity on fresh elements there.  
+\end{enumerate}
+Summing up, in this example we have shown an orbit-infinite monoid which contains an obstruction of type (a).
+\end{myexample}
+
+\begin{myexample}
+[Obstruction of type (b)] In this example, the domain $Q$ is $\atoms + 1$. The monoid consists of functions that map finitely many elements to $1$, and are the identity on the remaining elements. This monoid is isomorphic to the monoid of finite subsets of $\atoms$, with set union being the monoid operation. In particular, this monoid is orbit-infinite. 
+
+Here is an obstruction of type (b). The support $S$ is again empty. The function $f$ maps some atom $a$ to $1$, and is the identity otherwise. The argument $x$ is the atom $a$ that is mapped to $1$. We now show that this is an obstruction of type (b).
+\begin{enumerate}
+    \item The $S$-orbit of $x$ is the set $\atoms$, and $f$ is the identity on fresh elements of this orbit.  
+    \item When applying the function $f$ to $x$, the atom $a$ disappears from the support. 
+\end{enumerate}
+\end{myexample}
+
+
+The rest of this paper is devoted to proving \cref{thm:obstructions-sound-and-complete}.
+We use the name ``soundness'' and ``completeness'' for the two implications in  the theorem, as explained in the following diagram: 
+\[
+\begin{tikzcd}
+\text{not orbit-finite}
+\arrow[r, bend left, Rightarrow, "\text{completeness}"]
+& 
+\text{has an obstruction}
+\arrow[l, bend left, Rightarrow, "\text{soundness}"]
+\end{tikzcd}
+\]
+
+
+In this section, we prove the easier implication, namely soundness, and we show how the theorem can be applied to decide if a deterministic orbit-finite automaton is equivalent to an orbit-finite monoid.  The completeness part will be proved in Section~\ref{sec:completeness-of-obstructions}.
+
+\subsection{Soundness of obstructions}
+\label{sec:soundness-of-obstructions}
+We begin by proving soundness of obstructions.
+\begin{lemma}[Soundness]
+    Let $Q$ be an orbit-finite set, and let $M$ be a finitely supported submonoid of $Q \smallfsfun Q$.
+    If $M$ has an obstruction, then it is not orbit-finite.
+\end{lemma}
+\begin{proof}
+    In the proof of the lemma, we use the following definition.
+    \begin{definition}
+        Let $S$ be a finite set of atoms.
+        Two objects with atoms $x$ and $y$ are called $S$-independent if 
+        \begin{align*}
+        \sup(x) \cap \sup(y) \subseteq S.
+        \end{align*}
+    \end{definition}
+    There are two types of obstructions, and therefore two proofs. However, in both proofs we use a common argument, which is contained in the following claim.
+
+    \begin{claim}\label{claim:fresh-wrt-f}
+        Let $S$ be a finite support,  let  $X \subseteq Q$ be an $S$-orbit, and let $f : Q \to Q$ be a finitely supported function that is the identity on fresh elements of  $X$. Then 
+        \begin{align*}
+        \text{$x$ and $f$ are  $S$-independent}
+        \quad \Rightarrow \quad 
+        f(x)=x
+        \qquad \text{for every } x \in X.
+        \end{align*}
+    \end{claim}
+    \begin{proof}
+        In the proof, we will be interested in two subsets of $X$, namely the elements that satisfy the assumption
+                \begin{align}\label{eq:fresh-wrt-f}
+        \setbuild{ x \in X}{$x$ and $f$ are $S$-independent},
+        \end{align}
+        and the elements that satisfy the conclusion
+        \begin{align}
+        \label{eq:fixpoints-of-f}
+        \setbuild{x \in X}{$f(x)=x$}
+        \end{align}
+        We want to show that the first set is contained in the second one.
+    
+        Let $T$ be the union of the least supports of $f$ and $X$. 
+        The first observation is that the set~\eqref{eq:fresh-wrt-f} of elements from the assumption   is a single $T$-orbit.
+        Indeed, choose two elements in this set, call them $x_1$ and $x_2$. Since $X$ is a single $S$-orbit, we know that there is an $S$-permutation $\pi$ that maps $x_1$ to $x_2$. We want to show that $\pi$ can be improved so that it becomes a $T$-permuation. Indeed, this is the case, since by definition of the set in~\eqref{eq:fresh-wrt-f}, for both $x_1$ and $x_2$, each atom in the least support is either from $S$, or disjoint with $T$. Since we only care about what $\pi$ does to atoms in the least supports, we can choose $\pi$ so that it fixes $T$. 
+        
+        We now show that the subset~\eqref{eq:fresh-wrt-f} from the assumption has the same dimension as $X$. 
+        Let $d$ be the dimension of $X$, and choose some $x \in X$ that witnesses this dimension.  By Claim~\ref{claim:dimension-supports}, one cam improve this choice so that the least support of $x$ has $d$ atoms which are not in $T$, in particular $x$ witnesses that the set~\eqref{eq:fresh-wrt-f} has dimension $d$. 
+        
+        Since the set \eqref{eq:fresh-wrt-f} has the same dimension as $X$, we can use the assumption that $f$ is almost the identity on $X$ to conclude that there is at least one fixpoint of $f$ in the set~\eqref{eq:fresh-wrt-f}. However, the set of fixpoints~\eqref{eq:fixpoints-of-f} is supported by $T$, and so it is a union of $T$-orbits. It follows that the $T$-orbit from~\eqref{eq:fresh-wrt-f} is contained in the set of fixpoints~\eqref{eq:fixpoints-of-f}.
+    \end{proof}
+
+
+    Consider an obstruction, which consists of a set $X$, an element $x \in X$ and a function $f \in M$. Let $T$ be a finite set of atoms that supports all components of the obstruction, i.e.~$x, X,f$ and $M$. We can apply $S$-permutations to move this set into infinitely many disjoint places (up to the atoms $S$), i.e.~we can find infinitely many $S$-permutations $\pi_1,\pi_2,\ldots$ so that  
+    \begin{align*}
+    T_i \cap T_j \subseteq S \qquad \text{for every } i \neq j,
+    \end{align*}
+    where $T_i$ is defined to be the image of $T$ under $\pi_i$. Let us define $x_i$ and $f_i$ to be the images of $x$ and $f$ under $\pi_i$.  For the set $X$, there is no dependence on the permutation, since this set is supported by $S$, and the permutations fix this support. We will show that the set of functions 
+    \begin{align*}
+    \setbuild{ \myunderbrace{f_1; f_2; \cdots; f_i}{call this function $f_{1..i}$}}{ $i \in \set{1,2,\ldots}$}
+    \end{align*}
+    has unbounded supports, thus witnessing that $M$ is orbit-infinite. The main step will be proved in the following claim.
+    
+\begin{claim}
+    Let $i,j \in \set{1,2,\ldots}$. Then 
+    \begin{align*}
+    i > j
+    \quad \Leftrightarrow \quad
+    \text{$x_i$ is a fixpoint of } f_{1..j}.
+    \end{align*}
+\end{claim}
+\begin{proof}
+    We begin with the simpler implication $\Rightarrow$. If $i > j$, then the least support of $x_i$ is disjoint with the least supports of $f_1, f_2, \ldots, f_j$, except for the atoms from $S$. Therefore, we can use Claim~\ref{claim:fresh-wrt-f} to conclude that $x_i$ is a fixpoint of all  the functions $f_1,\ldots,f_j$, in particular it is a fixpoint of $f_{1..j}$.
+\end{proof}
+    By applying $S$-permutations to this obstruction, we can get infinitely many obstructions 
+        \begin{align*}
+        (f_1,x_1), (f_2,x_2),\ldots
+        \end{align*}
+    which are also obstructions, and such that for every $i \neq j$ the least supports of the pairs $(f_i,x_i)$ and $(f_j,x_j)$ intersect only on the atoms from $S$. Therefore, we can use the above claim to conclude that 
+    \begin{align*}
+    f_i(x_j) = x_j \qquad \text{for every } j \neq i.
+    \end{align*}
+    We will consider the function 
+    \begin{align*}
+    f_{1..i} \eqdef f_1 ; f_2 ; \cdots ; f_i.
+    \end{align*}
+    All elements $x_j$ with $j \geq i$ are fixpoints of this function. 
+    The rest of the proof diverges, depending on the type of obstruction.
+
+    \begin{claim}
+        For every $i,j \in \set{1,2,\ldots}$ we have 
+        \begin{align*}
+        i  < j 
+        \quad \Rightarrow \quad
+        \text{$x_i$ is a fixpoint of } f_1; f_2; \cdots; f_j. 
+        \end{align*}
+    \end{claim}
+
+    \begin{enumerate}[(a)]
+        \item[(b)] Suppose that the obstruction has type (b), which means that there is some atom in $x$ that does not appear in the least supports of $(f,x,X)$. 
+        
+        Consider an obstruction of type (b). In this obstruction, there is some atom in the least support of $x$ that is not present in the least support of $(f,M,X)$. 
+        \item     Consider an obstruction of type (a). In this obstruction, there is some function $f \in M$ and some input $x \in X$ such that the output $f(x)$ is still in $X$, but it is not equal to $x$. 
+        
+        Let $S$ be a finite set of atoms that supports both $X$ and $M$. If we apply an $S$-permutation to the pair $(f,x)$, then we get another obstruction of type (a), because the definition of obstructions does not refer to any individual atoms, only the monoid $M$ and the set $X$. More importantly, as stated in the following claim, if an $S$-permutation $\pi$ maps the support of $(f,x)$ to some fresh atoms (fresh with respect to $S$), then the function $\pi(f)$ in the new obstruction will be the identity on $x$. 
+        
+        \begin{claim}
+            Let $S$ be a support of $X$ and $M$, and let $T \supseteq S$ be a support of $f$ and $x$. 
+            Let $\pi$ be an atom permutation that fixes $S$, and such that 
+            \begin{align*}
+            \pi(T) \cap T =  S.
+            \end{align*}
+            Then $x$ is a fixpoint of $\pi(f)$. 
+        \end{claim}
+        \begin{proof}
+            Consider the $S$-orbit of $x$. By the 
+            This is because $x$ 
+        \end{proof}
+        We can choose infinitely many permutations 
+        \begin{align*}
+        \pi_1, \pi_2, \ldots
+        \end{align*}
+        such that all of them fix the support $S$, but the 
+        We will show that there is an infinite set 
+        \begin{align*}
+        \set{x_1,x_2,\ldots} \subseteq X
+        \end{align*}
+        such that for every  
+    \end{enumerate}
+
+\end{proof}
+
+\subsection{Deciding orbit-finiteness}
+\label{sec:deciding-monoids}
+A corollary of the above theorem is that we can decide if a deterministic orbit-finite automaton is equivalent to an orbit-finite monoid. 
+\begin{corollary}
+    \label{cor:decide-orbit-finite-submonoids}
+    The following problem is decidable: 
+    \begin{enumerate}
+        \item \textbf{Input.} An orbit-finite set $Q$, and an orbit-finite subset 
+        \begin{align*}
+        \Sigma \subseteq Q \fsfun Q.
+        \end{align*}
+        \item \textbf{Question.} Is the monoid generated by $\Sigma$ orbit-finite?
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    The algorithm consists of two semi-algorithms. The first semi-algorithm terminates with success if the submonoid is orbit-finite and does not terminate otherwise. The second semi-algorithm does the opposite: it terminates with success if the submonoid is orbit-infinite, and does not terminate otherwise. By running the two semi-algorithms in parallel, we obtain a decision procedure for the problem at hand.
+    
+    The first semi-algorithm computes the compositions 
+    \begin{align*}
+    \Sigma_0 \eqdef \emptyset \qquad \Sigma_{n+1} = \Sigma_n \cup \Sigma \cdot \Sigma_n,
+    \end{align*}
+    and reports success if a stable value 
+    \begin{align*}
+    \Sigma_n = \Sigma_{n+1}
+    \end{align*}
+    is reached at some point. This semi-algorithm will report success if the generated monoid is orbit-finite, and otherwise it will not terminate. 
+    
+    The second semi-algorithm enumerates through all candidates for obstructions, i.e.~pairs consisting of a finitely supported subset $X \subseteq Q$ and a function $f$ generated by $\Sigma$, and it reports success if it finds a candidate which satisfies the two conditions 1 and 2 in the definition of an obstruction. Each such candidate can be represented in finite space, and therefore, one can enumerate through all candidates. The following claim shows that one can check if a candidate is an obstruction.
+    
+    \begin{claim}
+        There is an algorithm which checks if $X$ and $f$ are an obstruction.
+    \end{claim}
+    \begin{proof}
+        We present the algorithm in  pseudo-code, which uses the programming language described in~\cite[Section 11]{bojanczyk_slightly2018}. The salient feature of this programming language is that it allows looping (in parallel) over elements of an orbit-finite set. We omit the semantics of the programming language, which should be clear in the particular code below.   The code uses two sub-procedures, 
+    \texttt{dim} and \texttt{sup}, which compute the dimension of a set and its support, both of which can be computed in the programming language.
+        \begin{lstlisting}
+	def obstruction(X, f):
+
+	  # check condition 1 in the definition of an obstruction
+      I = $\emptyset$ # the set of non-fixpoints
+      for x in X:
+        if f(x) $\neq$ x:
+           I = I $\cup$ $\{$x$\}$
+      if dim(I) == dim(X): 
+        return False # f is not almost the identity on X
+
+      # check condition 2 in the definition of an obstruction
+      for x in X: 
+        if f(x) $\in$ X $\setminus$ $\{$x$\}$:
+          return True # obstruction of type (a)
+
+        if sup(x) $\setminus$ sup(f(x), X, M) $\neq$  $\emptyset$:
+          return True # obstruction of type (b)
+    
+      return False # no obstruction found
+        \end{lstlisting}
+    This program inputs two orbit-finite objects, and returns a Boolean.
+    As shown in~\cite[Theorem 11.2]{bojanczyk_slightly2018}, the program above, like any program in its programming language, can be executed in finite time, given a representation of its input. 		
+    \end{proof}
+
+    Thanks to the above claim, we can enumerate through all candidates for obstructions, and terminate with success once we find one. This semi-algorithm will terminate with success if and only if the monoid is orbit-infinite, since obstructions are a sound and complete witness for orbit-infinity (\cref{thm:obstructions-sound-and-complete}).
+\end{proof}
+
+
+A further corollary is an algorithm for the problem which was the original motivation for this paper, namely deciding if an automaton is equivalent to a monoid.
+\begin{corollary}
+    The following problem is decidable: 
+    \begin{enumerate}
+        \item \textbf{Input.} A deterministic orbit-finite automaton.
+        \item \textbf{Question.} Is the underlying language recognised by  an orbit-finite monoid?
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+Let $L \subseteq \Sigma^*$ be the language recognised by the input automaton, and consider the following two equivalence relations on input words:
+    \begin{itemize}
+        \item In the one-sided congruence, two words $w$ and $w'$ are equivalent if 
+        \begin{align*}
+        wx \in L \iff w'x \in L \qquad \text{for all } x \in \Sigma^*.
+        \end{align*}
+        Equivalence classes are states of the minimal deterministic automaton.
+        \item In the two-sided congruence, two words $w$ and $w'$ are equivalent if
+        \begin{align*}
+        ywx \in L \iff yw'x \in L \qquad \text{for all } x,y \in \Sigma^*.
+        \end{align*}
+        Equivalence classes are states of the minimal  monoid.
+    \end{itemize}
+    Using a determinisation algorithm, we can compute a minimal deterministic automaton for the language, which has some orbit-finite set of states, call it $Q$. Each input word induces a state transformation of type $Q \to Q$. Essentially by definition,  two words are equivalent under the two-sided congruence if and only if they induce the same state transformation. Therefore, the problem reduces to  deciding if the monoid of possible state transformations is orbit-finite. This monoid is orbit-finitely generated, namely by the state transformations of individual letters (and the empty word). Therefore, we can apply Corollary~\ref{cor:decide-orbit-finite-submonoids} to decide if the monoid is orbit-finite.
+\end{proof}

@@ -1,0 +1,168 @@
+\section{Dimension and generic orbits}
+\label{sec:generic-orbits}  
+
+We are working with the equality atoms. Therefore, each element $x$ of an orbit-finite set has a least support, which we denote by $\sup(x)$.
+\begin{definition}
+    [Dimension] \label{def:dimension} For an orbit-finite set $X$, its \emph{dimension} is defined to be 
+    \begin{align*}
+    \max_{x \in X} |\sup(x) \setminus \sup(X)|.
+    \end{align*}
+\end{definition}
+The notion of dimension makes sense for any atoms. However, in the case of the equality atoms it is particularly well-behaved. Here is one useful property (this property is also true for other atoms, such as the order atoms, but later in the paper we will use properties that are truly specific to the equality atoms, and which fail for the order atoms).
+
+\begin{lemma}\label{lem:dimension-unions}
+    Sets of dimension at most $d$ are closed under taking finite unions. 
+\end{lemma}
+\begin{proof}
+    We give two arguments.
+
+    The first argument is indirect, and uses the connection with Morley rank~\cite[p.~240]{hodges1993model}. One can show that the dimension of an orbit-finite set (under the equality atoms) is the same as the Morley rank of the structure that is obtained from $X$ by adding all finitely supported relations. Structures of given Morley rank are closed under taking finite unions, see~\cite[p. 225]{Ziegler_2008}.
+
+    Let us now give a direct argument. The main observation is in the following claim, which shows that we do not need to use the least support of $X$ in the definition of dimension, and we can use any other support instead.
+    
+    \begin{claim}\label{claim:dimension-supports}
+        Let $X$ be an orbit-finite set, and let $S$ be a finite set of atoms supports it. Then 
+        \begin{align*}
+        \dim(X) = \max_{x \in X} |\sup(x) \setminus S|.
+        \end{align*}
+    \end{claim}
+    \begin{proof}
+        The definition of dimension that uses $S$ can be, on the face of it, smaller than the definition which uses the least support. However, we can always choose $x$ so that its support does not use any elements from $S$, except for those that are in the least support of $X$. For such a choice, the dimensions come out the same.
+    \end{proof}
+    The above claim immediately gives the lemma, since it shows that the support of the two sets is irrelevant.
+\end{proof}
+
+The following definition  will be used frequently in the paper. 
+
+\begin{definition} For $d \in \set{1,2\ldots}$,  we say that two  orbit-finite sets $X$ and $Y$ are \emph{equivalent up to dimension $d$}, denoted by $X \sim_d Y$,  if their symmetric difference $X \xor Y$ has dimension strictly smaller than $d$. We say that two sets are \emph{equivalent} if they have the same dimension, and they are equivalent up to this dimension.
+\end{definition}
+
+The above definition does not cover the edge case of $d=0$, since it is impossible to have dimension strictly smaller than $0$. One  solution for this edge case is to define the dimension of the empty set to be $-1$. The other solution, which we use here, is to never talk about the dimension of the empty set, and to explicitly define  equivalence up to dimension $d=0$ to be  the same as equality. 
+
+
+\begin{lemma}
+    Equivalence up to dimension $d$ is an equivalence relation.
+\end{lemma}
+\begin{proof}
+    The reflexivity and symmetry are immediate. Let us prove transitivity. For every three sets $X, Y$ and $Z$, the  symmetric difference $X \xor Z$ is contained in the union of the symmetric differences $X \xor Z$ and $Y \xor Z$. Therefore, transitivity follows from \cref{lem:dimension-unions}, which shows that sets of dimension strictly smaller than $d$ are closed under taking finite unions.
+\end{proof}
+
+
+
+\begin{definition}[One-orbit sets]
+    An $S$-orbit is any set of the form 
+    \begin{align*}
+    \setbuild{\pi(x)}{ $\pi$ is an $S$-permutation},
+    \end{align*}
+    for some $x$. A one-orbit set is any set that is an $S$-orbit for some finite support $S$. 
+\end{definition}
+
+
+\begin{definition}[Holding for fresh elements]
+    Let $X$ be a one-orbit set, and let $Y$ be some other set. We say that $Y$ holds for fresh elements of $X$ if 
+    \begin{align*}
+    \dim(X \setminus Y) < \dim(X).
+    \end{align*}
+\end{definition}
+
+We think of the set $Y$ as expressing some property of elements in $X$, and then we say that property $Y$ holds for fresh elements of $X$ if the condition from the above definition is satisfied.
+
+\begin{lemma}
+    Let $X$ be a one-orbit set. Then $Y$ holds for fresh elements of $X$ if and only if there is some $x \in X \cap Y$ such that 
+    
+\end{lemma}
+
+\paragraph*{Generic orbits.}
+\begin{definition}
+    [Generic orbit] \label{def:generic-orbit} Let $X$ be an orbit-finite set. A \emph{generic orbit of dimension $d$} in $X$ is an equivalence class, under the equivalence relation $\sim_d$, of any one-orbit subset $Y \subseteq X$ that has dimension $d$. A \emph{generic orbit} is a generic orbit of some dimension.
+\end{definition}
+
+We can apply atom permutations to generic orbits, by applying an atom permutation to the entire equivalence class. It is not hard to see that the result is also a generic orbit, at least as long as the permutation fixes the support of the underlying set $X$. Therefore, it is meaningful to talk about orbits of generic orbits.
+
+
+
+\begin{lemma}
+    \label{lem:orbit-finitely-many-generic-orbits} For every orbit-finite set $X$, its set of generic orbits is orbit-finite.
+\end{lemma}
+\begin{proof}
+    For the purposes of this proof let us write $|X|$ for  the number of orbits of generic orbits in a set $X$. We want to show that $|X|$ is finite. 
+
+    \begin{claim}
+        Let $X$ and $Y$ be orbit-finite sets. 
+        \begin{itemize}
+            \item         If $X$ and $Y$ have orbit-finitely many generic orbits, then so does $X \cup Y$.
+\item If there is a surjective finitely supported function $f: X \to Y$, and $X$ has  orbit-finitely many generic orbits, then so does $Y$.
+        \end{itemize}
+    \end{claim}
+    \begin{proof}
+        For the first item, we observe that every generic orbit in $X \cup Y$ is a generic orbit in $X$ or a generic orbit in $Y$, and orbit-finite sets are closed under taking unions.  For the second item, we observe that the function $f$ can be lifted to a surjective function on generic orbits, and orbit-finite sets are closed under images of surjective finitely supported functions.
+    \end{proof}
+    Every orbit-finite set can be obtained from sets of the form $\atoms^{(d)}$ by taking finite unions and images of surjective finitely supported functions. Therefore, to prove the lemma, it remains to show that $\atoms^{(d)}$ has orbit-finitely many generic orbits for every $d$. This is proved in the following claim.
+    \begin{claim}
+        For  one-orbit set $X \subseteq \atoms^{(d)}$ there exist distinct atoms $a_1,\ldots,a_d$ such that 
+        \begin{align*}
+        X \sim X_1 \times \cdots \times X_d,
+        \end{align*}
+        where each set $X_i$ is either $\set{a_i}$ or $\atoms \setminus \set{a_1,\ldots,a_d}$. 
+    \end{claim}
+    \begin{proof}
+        ss
+    \end{proof}
+\end{proof}
+
+\newcommand{\req}{\operatorname{req}}
+
+
+\begin{definition}
+    For a one-orbit set $X$, its \emph{required atoms} are defined to be 
+    \begin{align*}
+    \req(X) 
+    \quad \eqdef \quad 
+    \bigcap_{x \in X} \sup(x).
+    \end{align*}
+\end{definition}
+
+The following lemma shows that the required atoms of $X$ are exactly those atoms from the least support of $X$ that are allowed to appear in the least support of any element $x \in X$.
+\begin{lemma}
+    If $X$ is a one-orbit set, then for every $x \in X$, 
+    \begin{align*}
+    \sup(x) \cap \sup(X) = \req(X).
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    Suppose that $x \in X$ has some atom $a$ in its least support. Because $X$ is a one-orbit set, every element of $X$ can be written as  $\pi(x)$ for some atom permutation that fixes the least support of $X$. Since $a$ is in this least support, it follows that $\pi(x)$ also has $a$ in its least support. Therefore, $a$ is a required atom. 
+\end{proof}
+
+\begin{lemma}\label{lem:dimension-fresh-elements}
+    Let $X$ be a one-orbit set and let $Y$ be an orbit-finite set. The following conditions are equivalent: 
+    \begin{enumerate}
+        \item $\dim(X \cap Y) = \dim(X)$,
+        \item there is some $x \in X \cap Y$ such that $\sup(x) \cap \sup(Y) \subseteq  \req(X)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Let us prove the implication from (1) to (2).  Take some element in $x \in X \cap Y$ that witnesses the dimension, let $d$ be this dimension. By Claim~\ref{claim:dimension-supports}, we can choose this element so that it avoids the any chosen support of $X \cap Y$, in particular we can choose it so that it has $d$ atoms that are not in support of $Y$. The remaining atoms in the least support of $x$ are 
+
+    Let us prove the converse implication. Take the element $x$ from condition (2). 
+\end{proof}
+
+
+
+\begin{definition}[Holding for fresh elements]
+    We say that property $Y$ holds for fresh elements of $X$ if either of the two equivalent conditions from \cref{lem:dimension-fresh-elements} holds.
+\end{definition}
+
+
+
+
+
+\begin{definition}
+    A one-orbit set $X$ is called \emph{canonical} if 
+    \begin{align*}
+    \req(X) = \sup(X).
+    \end{align*}
+\end{definition}
+
+\begin{lemma}
+    Every one-orbit set is equivalent to a unique canonical one-orbit set. 
+\end{lemma}
