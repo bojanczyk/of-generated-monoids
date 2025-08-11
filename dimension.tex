@@ -1,168 +1,298 @@
 \section{Dimension and generic orbits}
-\label{sec:generic-orbits}  
+\label{sec:generic-orbits}
+In this section, we introduce some fundamental concepts which will be used in the paper, namely dimension, degree, and Morley equivalence.
 
-We are working with the equality atoms. Therefore, each element $x$ of an orbit-finite set has a least support, which we denote by $\sup(x)$.
+\subsection{Dimension}
+\label{sec:dimension}
+The general idea behind the dimension of an orbit-finite set is that it describes the number of atoms that are needed to describe an element of the set. For example, the set $\atoms^2$ has dimension two. However, the formal definition needs to be a bit more subtle, since it needs to account for constants that are built into the set. For example, the set
+\begin{align*}
+\setbuild{(a,b,c) \in \atoms^3}{$a = \john$}
+\end{align*}
+will have dimension two, because only the atoms $b$ and $c$ are needed, since $a$ is known in advance. The formal definition is uses supports. Since we are  working with the equality atoms, each element $x$ of an orbit-finite set has a least support, which we denote by $\sup(x)$.
 \begin{definition}
-    [Dimension] \label{def:dimension} For an orbit-finite set $X$, its \emph{dimension} is defined to be 
-    \begin{align*}
-    \max_{x \in X} |\sup(x) \setminus \sup(X)|.
-    \end{align*}
+	[Dimension] \label{def:dimension} For an orbit-finite set $X$, its \emph{dimension} is defined to be
+	\begin{align*}
+		\max_{x \in X} |\sup(x) \setminus \sup(X)|.
+	\end{align*}
 \end{definition}
-The notion of dimension makes sense for any atoms. However, in the case of the equality atoms it is particularly well-behaved. Here is one useful property (this property is also true for other atoms, such as the order atoms, but later in the paper we will use properties that are truly specific to the equality atoms, and which fail for the order atoms).
+The notion of dimension makes sense for any atoms, at least as long as there are least supports (weaker assumptions would be enough as well). However, in the case of the equality atoms it is particularly well-behaved. Here is one useful property (this property is also true for other atoms, such as the order atoms, but later in the paper we will use properties that are truly specific to the equality atoms, and which fail for the order atoms).
 
 \begin{lemma}\label{lem:dimension-unions}
-    Sets of dimension at most $d$ are closed under taking finite unions. 
+	Sets of dimension at most $d$ are closed under taking finite unions.
 \end{lemma}
 \begin{proof}
-    We give two arguments.
+	We give two arguments.
 
-    The first argument is indirect, and uses the connection with Morley rank~\cite[p.~240]{hodges1993model}. One can show that the dimension of an orbit-finite set (under the equality atoms) is the same as the Morley rank of the structure that is obtained from $X$ by adding all finitely supported relations. Structures of given Morley rank are closed under taking finite unions, see~\cite[p. 225]{Ziegler_2008}.
+	The first argument is indirect, and uses the connection with Morley rank~\cite[p.~240]{hodges1993model}. One can show that the dimension of an orbit-finite set (under the equality atoms) is the same as the Morley rank of the structure that is obtained from $X$ by adding all finitely supported relations. Structures of given Morley rank are closed under taking finite unions, see~\cite[p. 225]{Ziegler_2008}.
 
-    Let us now give a direct argument. The main observation is in the following claim, which shows that we do not need to use the least support of $X$ in the definition of dimension, and we can use any other support instead.
-    
-    \begin{claim}\label{claim:dimension-supports}
-        Let $X$ be an orbit-finite set, and let $S$ be a finite set of atoms supports it. Then 
+	Let us now give a direct argument. The main observation is in the following claim, which shows that we do not need to use the least support of $X$ in the definition of dimension, and we can use any other support instead.
+
+	\begin{claim}\label{claim:dimension-supports}
+		Let $X$ be an orbit-finite set, and let $S$ be a finite set of atoms supports it. Then
+		\begin{align*}
+			\dim(X) = \max_{x \in X} |\sup(x) \setminus S|.
+		\end{align*}
+	\end{claim}
+	\begin{proof}
+		The definition of dimension that uses $S$ can be, on the face of it, smaller than the definition which uses the least support. However, we can always choose $x$ so that its support does not use any elements from $S$, except for those that are in the least support of $X$. For such a choice, the dimensions come out the same.
+	\end{proof}
+	The above claim immediately gives the lemma, since it shows that the support of the two sets is irrelevant.
+\end{proof}
+
+
+\subsection{Morley equivalence}
+\label{sec:morley-equivalence}
+In this section, we introduce Morley equivalence, which considers two sets to be equivalent if they have the same dimension, and they differ on parts of strictly lower dimension. The name is chosen in refernce to the fact that dimension is the same as Morley rank.
+
+\begin{definition}[Morley equivalence] We say that two orbit-finite sets  are Morley equivalent if either they both have dimension zero and are equal, or otherwise they have the same dimension $d>0$,  and their symmetric difference  has dimension strictly smaller than $d$.
+\end{definition}
+
+Let us underline that a necessary condition for Morley equivalence is that the two sets have the same dimension.
+The above definition makes an exception for dimension $0$, because it is impossible to have negative dimension. An alternative way of phrasing the above definition would be to redefine the dimension of the empty set to be $-1$; in this case we would no longer need the exception. We do not use the alternative way.
+
+\begin{myexample}
+The following three sets of dimension 2 are all Morley equivalent:
+\begin{align*}
+	\atoms^{(2)}
+	\qquad
+	(\atoms \setminus \set{\john, \eve})^{(2)}
+	\qquad
+	(\atoms \setminus \set{\eve, \tom})^{(2)}.
+\end{align*}
+This is because for each pair, the symmetric difference uses only pairs which have at least one coordinate that uses $\john, \eve$ or $\tom$, and the set of such pairs has dimension at most one. Also, adding a set of dimension one to any of the above sets, e.g. the set $\atoms$, will not affect Morley equivalence.
+\end{myexample}
+
+
+
+\begin{lemma}
+	Morley equivalence is an equivalence relation.
+\end{lemma}
+\begin{proof}
+	The reflexivity and symmetry are immediate. Let us prove transitivity. For every three sets $X, Y$ and $Z$, the  symmetric difference $X \xor Z$ is contained in the union of the symmetric differences $X \xor Z$ and $Y \xor Z$. Therefore, transitivity follows from \cref{lem:dimension-unions}, which shows that sets of dimension strictly smaller than $d$ are closed under taking finite unions.
+\end{proof}
+
+
+In this paper, we will be interested in the one-orbit subsets of an orbit-finite set $X$. The family of one-orbit subsets will, in general, be orbit-infinite. 
+
+\begin{myexample}
+    Consider the set $\atoms$. A one-orbit subset is either a single atom, or a co-finite subset. The number of  co-finite subsets is not orbit-finite, because the number of missing atoms is invariant under atom permutations.
+\end{myexample}  
+
+In fact, the same reasoning as in the above can be applied to any orbit-finite set of nonzero dimension (i.e.~any orbit-finite set that is not finite). However, as we will show in \cref{lem:orbit-finitely-many-generic-orbits}, if we identify one-orbit subsets up to Morley equivalence, then the number of such equivalence classes is orbit-finite. Let us first formalise the notion of one-orbit subsets up to Morley equivalence.
+
+\begin{definition}
+    [Generic orbit]  	Define the \emph{generic orbits} of an orbit-finite set to be equivalence classes, under Morley equivalence, of its one-orbit subsets of $X$. 
+\end{definition}
+
+One can apply atom permutations to generic orbits, and each generic orbit is finitely supported (by any set that supports some representative, as well as the ambient set $X$). Therefore, it is meaningful to talk about orbits of generic orbits. 
+
+
+
+\begin{lemma}
+	\label{lem:orbit-finitely-many-generic-orbits} Every orbit-finite set $X$ has orbit-finitely many generic orbits. 
+\end{lemma}
+\begin{proof}
+    Let us write $|X|$ for the number of orbits in the set of generic orbits of $X$. We want to show that  $|X|$ is finite. 
+	\begin{claim}
+		Let $X$ and $Y$ be orbit-finite sets.
+		\begin{itemize}
+			\item $|X \cup Y| \leq |X| + |Y|$;
+			\item If there is a surjective finitely supported function from $X$ to $Y$, then $|X| \ge |Y|$.
+		\end{itemize}
+	\end{claim}
+	\begin{proof}
+		For the first item, we observe that every generic orbit in $X \cup Y$ is a generic orbit in $X$ or a generic orbit in $Y$, and orbit-finite sets are closed under taking unions.  For the second item, we observe that the function $f$ can be lifted to a surjective function on generic orbits, and orbit-finite sets are closed under images of surjective finitely supported functions.
+	\end{proof}
+	Every orbit-finite set can be obtained from sets of the form $\atoms^{(d)}$ by taking finite unions and images of surjective finitely supported functions. Therefore, to prove the lemma, it remains to show that $\atoms^{(d)}$ has orbit-finitely many generic orbits for every $d$. This is proved in the following claim.
+	\begin{claim}
+        The set of generic orbits in $\atoms^{(d)}$ is orbit-finite. 
+	\end{claim}
+	\begin{proof}
+		Consider a one-orbit subset $X \subseteq \atoms^{(d)}$, and let $S$ be its least support. It is not hard to see that $X$ must be of the form 
+		\begin{align*}
+			X_1 \times \cdots \times X_d,
+		\end{align*}
+		where each set $X_i$ is either $\atoms \setminus S$ or  $\set a $ for some $a \in  S$. In other words, some coordinates are fixed (these are the required atoms), and the remaining coordinates must avoid some atoms (which include the required atoms, but might also involve other atoms). Furthermore, if we decrease the set  $S$, which makes the set $X$ bigger, while keeping the required atoms,  then we get a set that is Morley equivalent. There are at most $d$ required atoms.  Therefore, each one-orbit subset of $\atoms^{(d)}$ is Morley equivalent to a subset which has a support of size at most $d$. The set of such subsets is orbit-finite.
+	\end{proof}
+\end{proof}
+
+
+
+
+\subsection{Degree}
+\label{sec:degree}
+ The dimension of a set is the most important parameter used in this paper. However, there is a secondary parameter, called the \emph{degree}, which allows us to distinguish between sets of the same dimension.
+
+\begin{definition}[Degree]
+	The \emph{degree} of an orbit-finite set is defined is the maximal number $k$, such that the set has $k$ disjoint subsets of dimension $\dim X$.
+\end{definition}
+
+\begin{myexample}
+Both sets $\atoms$ and $\atoms + \atoms$ have dimension one, but the first has degree one, while the second has degree two.
+\end{myexample}
+
+As suggested by the above example, the degree is related to the number of orbits. We will show that,  up to Morley equivalence, the degree is the number of orbits of maximal dimension, as shown in the following lemma. We begin with a special case of this result.
+
+
+\begin{lemma}\label{lem:one-orbit-one-degree}
+    Every one-orbit set has degree one. 
+\end{lemma}
+\begin{proof}
+Before proving the lemma, we observe that it does not hold for arbitrary atom structures. For example, in the order atoms, the set $\atoms$ has infinite degree, because it can be split into an arbitrarily large number of disjoint infinite intervals, each of which has dimension one.
+Therefore, at some point the proof will need to use special properties of the equality atoms. 
+
+\begin{definition}
+	For a one-orbit set $X$, its \emph{required atoms} are defined to be
+	\begin{align*}
+		\req(X)
+		\quad \eqdef \quad
+		\bigcap_{x \in X} \sup(x).
+	\end{align*}
+\end{definition}
+
+The following claim shows that if we take a one-orbit set $X$, and an element $x \in X$, every atom in the least support of $x$ will either be a required atom, or it will be fresh with respect to$ X$. In other words, non-required atoms from the least support of the set $X$ will not appear in least supports of its elements .
+\begin{claim}\label{claim:one-orbit-required}
+	If $X$ is a one-orbit set, then for every $x \in X$,
+	\begin{align*}
+		\sup(x) \cap \sup(X) = \req(X).
+	\end{align*}
+\end{claim}
+\begin{proof}
+	Suppose that $x \in X$ has some atom $a$ in its least support. Because $X$ is a one-orbit set, every element of $X$ can be written as  $\pi(x)$ for some atom permutation that fixes the least support of $X$. Since $a$ is in this least support, it follows that $\pi(x)$ also has $a$ in its least support. Therefore, $a$ is a required atom.
+\end{proof}
+
+The final claim that we will use talks about required atoms.
+
+\begin{claim}\label{claim:one-orbit-required-same-dimension}
+    If $X \subseteq Y$ are one-orbit sets of the same dimension, then they have the same required atoms. 
+\end{claim}
+\begin{proof}
+    If $X$ had more required atoms, then its dimension would drop.
+\end{proof}
+
+Equipped with the above claims, we can now prove the lemma. The minimal degree is one, and thus we need to show that a one-orbit set cannot have larger degree. In other words, we need to show that a one-orbit set cannot contain two one-orbit  subsets of the same dimension.
+
+
+Consider a one-orbit set $X$, of dimension $d$, and suppose that one can find two disjoint subsets $X_1$ and $X_2$ that have the same dimension as $X$. Let $S$ be a finite set of atoms that supports all three sets $X$, $X_1$ and $X_2$.  Since $X$ is a one-orbit set, each element of it has the same size of least support, say $n$. Thanks to Claim~\ref{claim:one-orbit-required}, for each element $x \in X$, it least support has $n-d$ required atoms, and the remaining atoms are not in the least support of $X$. By Claim~\ref{claim:one-orbit-required-same-dimension}, the required atoms are the same for $X_1$ and $X$. This means that we can have an element $x_1 \in X_1$ whose least support consists of the required atoms of $X$, plus $d$ fresh extra atoms, which can be assumed to be outside the support $S$. The same argument applies to $X_2$, yielding an analogous element $x_2 \in X_2$. These elements can be mapped to each other using some atom permutation that fixes the support $S$, thanks to the following claim, in which the set $T$ is the least support of $X$. 
+
+\begin{claim}
+    Let $T \subseteq S$ be finite set of atoms, and let $x_1$ and $x_2$ be two elements in the same $T$-orbit, such that their least supports do not contain elements from $S \setminus T$. Then $x_1$ and $x_2$ are in the same $S$-orbit. 
+\end{claim}
+\begin{proof}
+    Let $\pi$ be a permutation that maps $x_1$ to $x_2$ and which fixes $T$. This permutation must induce a bijection between the two sets 
+    \begin{align*}
+    \sup(x_1) \setminus T 
+    \quad \text{and} \quad
+    \sup(x_2) \setminus T.
+    \end{align*}
+    Outside these sets, we can assume that $\pi$ is the identity. Since This means that $\pi$ is the identity on $S$, since every element of $S$ is either in $T$, or it is outside the two sets above. 
+\end{proof}
+
+The above claim is the one which is specific to the equality atoms, and it does not hold for other atoms, such as the order atoms.
+\end{proof}
+
+
+\begin{lemma}\label{lem:signature-in-terms-of-orbits}
+    An orbit-finite of dimension $d$ set has degree $k$ if and only if it is Morley equivalent to a disjoint union of $k$ one-orbit sets of dimension $d$.
+\end{lemma}
+\begin{proof}
+    Let us first argue that the degrees are added when taking disjoint unions of sets of the same dimension. 
+
+    \begin{claim}\label{claim:dimension-degree-unions}
+        If $X_1$ and $X_2$ are disjoint orbit-finite sets of same dimension, then 
         \begin{align*}
-        \dim(X) = \max_{x \in X} |\sup(x) \setminus S|.
+        \degree{(X_1 \cup X_2)} = \degree{X_1} + \degree{X_2}.
         \end{align*}
     \end{claim}
     \begin{proof}
-        The definition of dimension that uses $S$ can be, on the face of it, smaller than the definition which uses the least support. However, we can always choose $x$ so that its support does not use any elements from $S$, except for those that are in the least support of $X$. For such a choice, the dimensions come out the same.
+        The inequality $\leq$ follows essentially by definition, so we only prove the  other inequality $\geq$. Let $d$ be the dimension of the sets $X_1$ and $X_2$. To prove the inequality $\geq$, it is enough to show that every one-orbit set $X$ contained in the union $X_1$ and $X_2$ will contribute to exactly one of the degrees of $X_1$ and $X_2$. This is because the dimension of both intersections $X_1 \cap X$ and $X_1 \cap X_2$ cannot be smaller than $d$ thanks to \cref{lem:dimension-unions}, and the dimension of both cannot be equal to $d$ thanks to \cref{lem:one-orbit-one-degree}.
     \end{proof}
-    The above claim immediately gives the lemma, since it shows that the support of the two sets is irrelevant.
-\end{proof}
 
-The following definition  will be used frequently in the paper. 
-
-\begin{definition} For $d \in \set{1,2\ldots}$,  we say that two  orbit-finite sets $X$ and $Y$ are \emph{equivalent up to dimension $d$}, denoted by $X \sim_d Y$,  if their symmetric difference $X \xor Y$ has dimension strictly smaller than $d$. We say that two sets are \emph{equivalent} if they have the same dimension, and they are equivalent up to this dimension.
-\end{definition}
-
-The above definition does not cover the edge case of $d=0$, since it is impossible to have dimension strictly smaller than $0$. One  solution for this edge case is to define the dimension of the empty set to be $-1$. The other solution, which we use here, is to never talk about the dimension of the empty set, and to explicitly define  equivalence up to dimension $d=0$ to be  the same as equality. 
-
-
-\begin{lemma}
-    Equivalence up to dimension $d$ is an equivalence relation.
-\end{lemma}
-\begin{proof}
-    The reflexivity and symmetry are immediate. Let us prove transitivity. For every three sets $X, Y$ and $Z$, the  symmetric difference $X \xor Z$ is contained in the union of the symmetric differences $X \xor Z$ and $Y \xor Z$. Therefore, transitivity follows from \cref{lem:dimension-unions}, which shows that sets of dimension strictly smaller than $d$ are closed under taking finite unions.
-\end{proof}
-
-
-
-\begin{definition}[One-orbit sets]
-    An $S$-orbit is any set of the form 
-    \begin{align*}
-    \setbuild{\pi(x)}{ $\pi$ is an $S$-permutation},
-    \end{align*}
-    for some $x$. A one-orbit set is any set that is an $S$-orbit for some finite support $S$. 
-\end{definition}
-
-
-\begin{definition}[Holding for fresh elements]
-    Let $X$ be a one-orbit set, and let $Y$ be some other set. We say that $Y$ holds for fresh elements of $X$ if 
-    \begin{align*}
-    \dim(X \setminus Y) < \dim(X).
-    \end{align*}
-\end{definition}
-
-We think of the set $Y$ as expressing some property of elements in $X$, and then we say that property $Y$ holds for fresh elements of $X$ if the condition from the above definition is satisfied.
-
-\begin{lemma}
-    Let $X$ be a one-orbit set. Then $Y$ holds for fresh elements of $X$ if and only if there is some $x \in X \cap Y$ such that 
-    
-\end{lemma}
-
-\paragraph*{Generic orbits.}
-\begin{definition}
-    [Generic orbit] \label{def:generic-orbit} Let $X$ be an orbit-finite set. A \emph{generic orbit of dimension $d$} in $X$ is an equivalence class, under the equivalence relation $\sim_d$, of any one-orbit subset $Y \subseteq X$ that has dimension $d$. A \emph{generic orbit} is a generic orbit of some dimension.
-\end{definition}
-
-We can apply atom permutations to generic orbits, by applying an atom permutation to the entire equivalence class. It is not hard to see that the result is also a generic orbit, at least as long as the permutation fixes the support of the underlying set $X$. Therefore, it is meaningful to talk about orbits of generic orbits.
-
-
-
-\begin{lemma}
-    \label{lem:orbit-finitely-many-generic-orbits} For every orbit-finite set $X$, its set of generic orbits is orbit-finite.
-\end{lemma}
-\begin{proof}
-    For the purposes of this proof let us write $|X|$ for  the number of orbits of generic orbits in a set $X$. We want to show that $|X|$ is finite. 
-
+    The second ingredient of the proof is the following claim, which shows that both dimension and degree are invariant with respect to Morley equivalence. 
     \begin{claim}
-        Let $X$ and $Y$ be orbit-finite sets. 
-        \begin{itemize}
-            \item         If $X$ and $Y$ have orbit-finitely many generic orbits, then so does $X \cup Y$.
-\item If there is a surjective finitely supported function $f: X \to Y$, and $X$ has  orbit-finitely many generic orbits, then so does $Y$.
-        \end{itemize}
+        \label{claim:dimension-degree-morley-invariant}
+        The dimension and degree are the same for Morley equivalent sets.
     \end{claim}
     \begin{proof}
-        For the first item, we observe that every generic orbit in $X \cup Y$ is a generic orbit in $X$ or a generic orbit in $Y$, and orbit-finite sets are closed under taking unions.  For the second item, we observe that the function $f$ can be lifted to a surjective function on generic orbits, and orbit-finite sets are closed under images of surjective finitely supported functions.
+        Follows from the definitions.
     \end{proof}
-    Every orbit-finite set can be obtained from sets of the form $\atoms^{(d)}$ by taking finite unions and images of surjective finitely supported functions. Therefore, to prove the lemma, it remains to show that $\atoms^{(d)}$ has orbit-finitely many generic orbits for every $d$. This is proved in the following claim.
-    \begin{claim}
-        For  one-orbit set $X \subseteq \atoms^{(d)}$ there exist distinct atoms $a_1,\ldots,a_d$ such that 
-        \begin{align*}
-        X \sim X_1 \times \cdots \times X_d,
-        \end{align*}
-        where each set $X_i$ is either $\set{a_i}$ or $\atoms \setminus \set{a_1,\ldots,a_d}$. 
-    \end{claim}
-    \begin{proof}
-        ss
-    \end{proof}
+
+    Using the two claims above, we complete the proof of the lemma. Take an orbit-finite set, and decompose it into a finite union of one-orbit sets. By Claim~\ref{claim:dimension-degree-morley-invariant}, giving a Morley equivalent set that has the same  dimension and degree.  The new set is a union of $k$ orbits of maximal dimension, and therefore it has degree exactly $k$ thanks to \cref{claim:dimension-degree-unions}. 
 \end{proof}
 
-\newcommand{\req}{\operatorname{req}}
+
+The pair consisting of dimension and degree, which is invariant along Morley equivalence by \cref{claim:dimension-degree-morley-invariant}, will be discussed in more detail in the following sections. This pair is called the signature, as described in the following definition.
 
 
-\begin{definition}
-    For a one-orbit set $X$, its \emph{required atoms} are defined to be 
+\begin{definition}[Signature]
+	The \emph{signature} of an orbit-finite set $X$ is the pair consisting of its dimension and degree. We order signatures lexicographically, with the dimension more important than the degree.
+\end{definition}
+
+
+\subsection{Fresh elements}
+\label{sec:fresh-elements}
+
+A subset of an orbit-finite set $X$ is considered large if it is equivalent to the containing set. In this subsection, we present a characterization of large subsets of one-orbit sets, which is formulated in terms of supports. 
+
+\begin{definition}[Fresh elements]
+    \label{def:fresh-elements}
+    Let $X$ be a one-orbit set. For some orbit-finite set $Y$, we say that $Y$ \emph{holds for fresh elements of $X$} if there is some $y \in X \cap Y$ such that 
     \begin{align*}
-    \req(X) 
-    \quad \eqdef \quad 
-    \bigcap_{x \in X} \sup(x).
+    \sup(y) \cap \sup(Y) \subseteq \sup(X).
     \end{align*}
 \end{definition}
 
-The following lemma shows that the required atoms of $X$ are exactly those atoms from the least support of $X$ that are allowed to appear in the least support of any element $x \in X$.
-\begin{lemma}
-    If $X$ is a one-orbit set, then for every $x \in X$, 
-    \begin{align*}
-    \sup(x) \cap \sup(X) = \req(X).
-    \end{align*}
+Thanks to \cref{claim:one-orbit-required}, the condition in the above definition is equivalent to 
+\begin{align*}
+\sup(y) \cap \sup(Y) \subseteq \req(X).
+\end{align*}
+
+\begin{lemma}\label{lem:large-subsets-fresh-elements}
+    Let $X$ be a one-orbit set. A subset $Y \subseteq X$ is Morley equivalent to $X$ if and only if $Y$ holds for fresh elements of $X$.
 \end{lemma}
 \begin{proof}
-    Suppose that $x \in X$ has some atom $a$ in its least support. Because $X$ is a one-orbit set, every element of $X$ can be written as  $\pi(x)$ for some atom permutation that fixes the least support of $X$. Since $a$ is in this least support, it follows that $\pi(x)$ also has $a$ in its least support. Therefore, $a$ is a required atom. 
+     We begin with the  implication $\Leftarrow$. Take some $y \in Y$ that witnesses the assumption of this implication. As mentioned after \cref{def:fresh-elements}, this means that 
+    \begin{align*}
+    \sup(y) \cap \sup(Y) \subseteq \req(X).
+    \end{align*}
+    We first that all three sets in the above inequality contain the required atoms of $X$. For $y$ this is a consequence of required atoms, while for $\sup(Y)$ we use the following claim.
+    \begin{claim}
+        If $X$ is a one-orbit set, then for every $Y \subseteq X$, the least support of $Y$ contains all required atoms for $X$.  
+    \end{claim}
+    \begin{proof}
+        Because every element of $Y$ must use the required atoms in its least support.
+    \end{proof}
+    Thanks to the above claim,  the least support of $y$ decomposes into two disjoint parts: (a) the required atoms of $X$, and (b) some atoms which are not in the least support of $Y$. The number of atoms in the second part is equal to the dimension of $X$, since for each element of $X$, its least support contains exactly $d$ atoms that are not required for $X$. Therefore, the element $y$ witnesses dimension $d$ for the set $Y$. Since $X$ is a one-orbit set, then any subset with the same dimension must be Morley equivalent to it, because otherwise $X$ would have degree at least two, which cannot happen by \cref{lem:one-orbit-one-degree}.
+
+    We now prove implication $\Rightarrow$, which says that if $Y \subseteq X$ is Morley equivalent to $X$, then $Y$ holds for fresh elements of $X$.  Since $Y$ is Morley equivalent to $X$, there is some one-orbit set $Z \subseteq Y$ of dimension $d$. By Claim~\ref{claim:one-orbit-required-same-dimension}, we know that $Z$ and $Y$ have the same required atoms. For an element $y \in Y$ which is taken from the orbit $Z$, its least support consists of (a) the required atoms and (b) the remaining atoms, of which there are $d$. By \cref{claim:dimension-supports}, we can choose the atoms can choose $y$ so that the remaining atoms from part (b)  avoid any desired finite set, such as the least support of $Y$. This establishes the conclusion of the implication $\Rightarrow$ in the lemma. 
 \end{proof}
+
+
+
+
+
 
 \begin{lemma}\label{lem:dimension-fresh-elements}
-    Let $X$ be a one-orbit set and let $Y$ be an orbit-finite set. The following conditions are equivalent: 
-    \begin{enumerate}
-        \item $\dim(X \cap Y) = \dim(X)$,
-        \item there is some $x \in X \cap Y$ such that $\sup(x) \cap \sup(Y) \subseteq  \req(X)$.
-    \end{enumerate}
+	Let $X$ be a one-orbit set and let $Y$ be an orbit-finite set. The following conditions are equivalent:
+	\begin{enumerate}
+		\item $\dim(X \cap Y) = \dim(X)$,
+		\item there is some $x \in X \cap Y$ such that $\sup(x) \cap \sup(Y) \subseteq  \req(X)$.
+	\end{enumerate}
 \end{lemma}
 \begin{proof}
-    Let us prove the implication from (1) to (2).  Take some element in $x \in X \cap Y$ that witnesses the dimension, let $d$ be this dimension. By Claim~\ref{claim:dimension-supports}, we can choose this element so that it avoids the any chosen support of $X \cap Y$, in particular we can choose it so that it has $d$ atoms that are not in support of $Y$. The remaining atoms in the least support of $x$ are 
+	Let us prove the implication from (1) to (2).  Take some element in $x \in X \cap Y$ that witnesses the dimension, let $d$ be this dimension. By Claim~\ref{claim:dimension-supports}, we can choose this element so that it avoids the any chosen support of $X \cap Y$, in particular we can choose it so that it has $d$ atoms that are not in support of $Y$. The remaining atoms in the least support of $x$ are
 
-    Let us prove the converse implication. Take the element $x$ from condition (2). 
+	Let us prove the converse implication. Take the element $x$ from condition (2).
 \end{proof}
 
 
 
 \begin{definition}[Holding for fresh elements]
-    We say that property $Y$ holds for fresh elements of $X$ if either of the two equivalent conditions from \cref{lem:dimension-fresh-elements} holds.
+	We say that property $Y$ holds for fresh elements of $X$ if either of the two equivalent conditions from \cref{lem:dimension-fresh-elements} holds.
 \end{definition}
 
 
 
 
 
-\begin{definition}
-    A one-orbit set $X$ is called \emph{canonical} if 
-    \begin{align*}
-    \req(X) = \sup(X).
-    \end{align*}
-\end{definition}
 
-\begin{lemma}
-    Every one-orbit set is equivalent to a unique canonical one-orbit set. 
-\end{lemma}

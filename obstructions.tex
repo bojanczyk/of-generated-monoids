@@ -7,20 +7,22 @@
     Let $Q$ be an orbit-finite set, and let $M$ be a finitely supported  submonoid of $Q \smallfsfun Q$.
     An \emph{obstruction} for $M$ consists of 
     \begin{itemize}
-        \item a finite support $S \subseteq \atoms$ which supports $M$;
+        \item a finite set of atoms $S$ which supports of $M$;
+        \item a one-orbit subset $X \subseteq Q$ which is supported by $S$;
         \item a function $f \in M$;
-        \item an argument $x$
     \end{itemize}
     with the following properties:
     \begin{enumerate}
-        \item $f$ is the identity on fresh elements in the  $S$-orbit of  $X$;
+        \item $f$ is the identity on fresh elements  of  $X$;
         \item $f(x) \neq x$ and one of the following conditions holds: 
         \begin{enumerate}[(a)]
-            \item $f$ is  the identity on fresh elements in the $S$-orbit of $f(x)$; or 
-            \item there is some atom in $\sup(x)$ that is neither in $S$ nor in $\sup(f(x))$. 
+            \item for some $x_1 \neq x_2 \in X$, $f(x_1) = f(x_2)$;
+            \item for some $x \in X$,  $\sup(x) \setminus \sup(f(x))$ contains an atom not in $S$.
+            \item for some $x \in X$, $f(x) \neq x$, but $f$ is the identity on fresh elements of the $S$-orbit of $f(x)$.
         \end{enumerate}
     \end{enumerate}
 \end{definition}
+
 
 In the above definition, there is a disjunction between items (a) and (b). Depending on which item is satisfied, we will speak of an obstruction of type (a) or (b). In principle, both types could hold at once.
 

@@ -12,20 +12,7 @@ This section, which is the technical core of the paper, is devoted to proving  c
 
 \subsection{The induction paramter}
 \label{sec:induction-parameter}
-The completeness proof is by on induction on a certain parameter. This section is devoted to defining this parameter, and establishing some of its basic properties. This parameter is called the signature of a set, and it consists of the dimension of the set, together with a secondary parameter that is called the degree, and which is defined below.
-
-
-\begin{definition}[Degree and signature]
-    Let $X$ be an orbit-finite set.
-    \begin{itemize}
-        \item The \emph{degree} of $X$ is the maximal number of disjoint subsets of dimension $\dim X$.
-        \item The \emph{signature} of $X$ is the pair $(\dim X, \deg X)$.
-    \end{itemize}
- We order degrees lexicographically, with the dimension more important than the degree.
-\end{definition}
-
-    A one orbit set has degree one, and degrees are added when taking disjoint unions of sets of same dimension. Therefore, every orbit-finite set has a defined degree.
-As we have mentioned before, the dimension of an orbit-finite set corresponds to its Morley rank. The degree above coincides with the usual notion of degree in the context of Morley rank.
+The completeness proof is by on induction on a certain parameter. 
 
 \paragraph*{The induction parameter.} We are now ready to define the induction parameter for the completeness proof.
 For a function between two orbit-finite sets, its \emph{image signature} is defined to be the signature of its image. In our completeness proof, the induction parameter will be the upper bound on image signatures of morphisms. There is a minor caveat: we exclude identity morphisms, since otherwise we would be simply talking about signatures of the objects in the category.
