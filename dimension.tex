@@ -1,3 +1,5 @@
+
+
 \section{Dimension and generic orbits}
 \label{sec:generic-orbits}
 In this section, we introduce some fundamental concepts which will be used in the paper, namely dimension, degree, and Morley equivalence.
@@ -267,29 +269,6 @@ Thanks to \cref{claim:one-orbit-required}, the condition in the above definition
     We now prove implication $\Rightarrow$, which says that if $Y \subseteq X$ is Morley equivalent to $X$, then $Y$ holds for fresh elements of $X$.  Since $Y$ is Morley equivalent to $X$, there is some one-orbit set $Z \subseteq Y$ of dimension $d$. By Claim~\ref{claim:one-orbit-required-same-dimension}, we know that $Z$ and $Y$ have the same required atoms. For an element $y \in Y$ which is taken from the orbit $Z$, its least support consists of (a) the required atoms and (b) the remaining atoms, of which there are $d$. By \cref{claim:dimension-supports}, we can choose the atoms can choose $y$ so that the remaining atoms from part (b)  avoid any desired finite set, such as the least support of $Y$. This establishes the conclusion of the implication $\Rightarrow$ in the lemma. 
 \end{proof}
 
-
-
-
-
-
-\begin{lemma}\label{lem:dimension-fresh-elements}
-	Let $X$ be a one-orbit set and let $Y$ be an orbit-finite set. The following conditions are equivalent:
-	\begin{enumerate}
-		\item $\dim(X \cap Y) = \dim(X)$,
-		\item there is some $x \in X \cap Y$ such that $\sup(x) \cap \sup(Y) \subseteq  \req(X)$.
-	\end{enumerate}
-\end{lemma}
-\begin{proof}
-	Let us prove the implication from (1) to (2).  Take some element in $x \in X \cap Y$ that witnesses the dimension, let $d$ be this dimension. By Claim~\ref{claim:dimension-supports}, we can choose this element so that it avoids the any chosen support of $X \cap Y$, in particular we can choose it so that it has $d$ atoms that are not in support of $Y$. The remaining atoms in the least support of $x$ are
-
-	Let us prove the converse implication. Take the element $x$ from condition (2).
-\end{proof}
-
-
-
-\begin{definition}[Holding for fresh elements]
-	We say that property $Y$ holds for fresh elements of $X$ if either of the two equivalent conditions from \cref{lem:dimension-fresh-elements} holds.
-\end{definition}
 
 
 

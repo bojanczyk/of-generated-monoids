@@ -82,30 +82,30 @@ In this subsection, we define annotations, which are a crucial notion in our com
     \begin{itemize}
     \item \textbf{Objects.} Objects are pairs $X \supseteq X'$, where $X'$ is a distinguished subset in $D(X)$.
     \item \textbf{Morphisms.} For two objects  $X \supseteq X'$ and $Y' \subseteq X$, the morphisms between them  are exactly those morphisms $f : X \to Y$ from the original category $\Cc$ such that 
-    the image $f(X)$ is equivalent to $Y$.
+    the image $f(X)$ is Morley equivalent to $Y$.
 \end{itemize}
 An \emph{annotation of $\Cc$} is any annotation that arises from some finitely supported map $D$.
  \end{definition}
 
- We want the map $D$ to produce orbit-finite families of sets. For this reason, we cannot simply use $D(X)$ to be all subsets of signature $\sigma$, since this family can be orbit-infinite (in fact, it will always be orbit-infinite if the dimension is nonzero, and there is at least one set of given signature). Since there does not seem to be any canonical way of choosing the distinguished subsets, we make the map $D$ a part of the definition.  The following lemma shows that the annotation can be chosen so that the distinguished subsets represent all possible subsets of signature $\sigma$, up to equivalence.
+ We want the map $D$ to produce orbit-finite families of sets. For this reason, we cannot simply use $D(X)$ to be all subsets of signature $\sigma$, since this family can be orbit-infinite (in fact, it will always be orbit-infinite if the dimension is nonzero, and there is at least one set of given signature). Since there does not seem to be any canonical way of choosing the distinguished subsets, we make the map $D$ a part of the definition.  The following lemma shows that the annotation can be chosen so that the distinguished subsets represent all possible subsets of signature $\sigma$, up to Morley equivalence.
 
 \begin{lemma}\label{lem:complete-annotation-exists}
-    Every orbit-finitely generated category $\Cc$ has  an  annotation which is complete in the following sense: for every object in $X$, every subset $X' \subseteq X$ of signature $\sigma$ is equivalent to some subset in $D(X)$.
+    Every orbit-finitely generated category $\Cc$ has  an  annotation which is complete in the following sense: for every object in $X$, every subset $X' \subseteq X$ of signature $\sigma$ is Morley equivalent to some subset in $D(X)$.
 \end{lemma}
 \begin{proof}
     To prove the lemma, we only need to define the map $D$, which has the corresponding completeness property. To find such a map, we will use the following claim, which gives a uniform upper bound on the supports needed to represent all subsets with given signature.
 
     \begin{claim}\label{claim:bound-on-support-size-for-representatives}
-        Let $\sigma$ be a signature, and let $X$ be an orbit-finite set. Every subset of $X$ that has signature $\sigma$ is equivalent to some subset that has a support of size at most
+        Let $\sigma$ be a signature, and let $X$ be an orbit-finite set. Every subset of $X$ that has signature $\sigma$ is Morley equivalent to some subset that has a support of size at most
         \begin{align*}
         \text{(support size of $X$)} + \text{(maximal support size of $x \in X$)} \cdot \text{(degree in $\sigma$)}.
         \end{align*} 
     \end{claim}
 \begin{proof}
     Let $n$ be the maximal support size mentioned in the claim.
-    Each one-orbit set of dimension $d$ is described by fixing at most $n$ atoms, and letting the remaining ones range over free atoms, with some atoms prohibited. The  prohibited  atoms can be chosen to be those from the least support of $X$, without affecting the set, up to equivalence. Therefore, every one-orbit subset of $X$ is  equivalent to one that has a support which consists of the least support of $X$, plus at most $n$ additional atoms. This gives the claim, since $n$ is multiplied by the number of orbits, which is the degree of $\sigma$
+    Each one-orbit set of dimension $d$ is described by fixing at most $n$ atoms, and letting the remaining ones range over free atoms, with some atoms prohibited. The  prohibited  atoms can be chosen to be those from the least support of $X$, without affecting the set, up to Morley equivalence. Therefore, every one-orbit subset of $X$ is  Morley equivalent to one that has a support which consists of the least support of $X$, plus at most $n$ additional atoms. This gives the claim, since $n$ is multiplied by the number of orbits, which is the degree of $\sigma$
 \end{proof}
-    Since the support size of objects in $\Cc$ is uniformly bounded, it follows that there is some uniform bound $N$, such that for every object in $X$, every subset of signature $\sigma$ is equivalent to some subset that has a support of size at most $N$. Therefore, we can define $D(X)$ to be all subsets of $X$ that have signature $\sigma$, and which have a support of size at most $N$. Since the number of subsets with a given support is finite, it follows that for each $X$, the family $D(X)$ is orbit-finite. 
+    Since the support size of objects in $\Cc$ is uniformly bounded, it follows that there is some uniform bound $N$, such that for every object in $X$, every subset of signature $\sigma$ is Morley equivalent to some subset that has a support of size at most $N$. Therefore, we can define $D(X)$ to be all subsets of $X$ that have signature $\sigma$, and which have a support of size at most $N$. Since the number of subsets with a given support is finite, it follows that for each $X$, the family $D(X)$ is orbit-finite. 
 \end{proof}
 
 As mentioned before, the construction in the above lemma is not canonical in any way, which is why we do not insist on any particular annotation, as long as it is complete. The general strategy behind our completeness proof is that to reduce the search for obstructions to the special case of the annotation.  Since our completeness proof deals with orbit-finitely generated categories, we need to show that annotations are orbit-finitely generated. This is proved in the following lemma.
@@ -113,7 +113,7 @@ As mentioned before, the construction in the above lemma is not canonical in any
 
 
 \begin{lemma}\label{lem:annotation-orbit-finitely-generated}
-    If $\Cc$ is orbit-finitely generated, and let $\Dd$ be a complete annotation. Then there is an orbit-finite set of morphisms in $\Dd$ which generates all morphisms.
+    If $\Cc$ is orbit-finitely generated, and let $\Dd$ be a complete annotation. Then the morphisms of $\Dd$ are generated by  an orbit-finite subset.
 \end{lemma}
 
 Before proving the lemma, let us first discuss a minor technical issue. 
@@ -147,7 +147,7 @@ Z_1 \ar[r,"f_2"] &
 &  Z_n = Y.
 \end{tikzcd}
 \]
-By definition of the annotation, we know that $f$ maps the distinguished subset $X'$ to a set equivalent to the distinguished  $Y'$. For $i \in \set{0,1,\ldots,n}$, define $Z'_i \subseteq Z_i$ to be the image of $X'$ under the first $i$ morphisms. We know that all of these sets have signature $\sigma$, since the first and last sets have this signature, and the signature can only go down when applying a morphism. Therefore, by completeness, the annotation contains sets which are equivalent to these distinguished sets. Summing up, we have decomposed the original morphism into a composition of liftings of generators. 
+By definition of the annotation, we know that $f$ maps the distinguished subset $X'$ to a set Morley equivalent to the distinguished  $Y'$. For $i \in \set{0,1,\ldots,n}$, define $Z'_i \subseteq Z_i$ to be the image of $X'$ under the first $i$ morphisms. We know that all of these sets have signature $\sigma$, since the first and last sets have this signature, and the signature can only go down when applying a morphism. Therefore, by completeness, the annotation contains sets which are Morley equivalent to these distinguished sets. Summing up, we have decomposed the original morphism into a composition of liftings of generators. 
 \end{proof}
 
 
@@ -166,7 +166,7 @@ The point of annotations is that we can reduce the search for obstructions to th
 \end{claim}
 \begin{proof}
 Let $f : X \to Y$ be a morphism in $\Cc$ of signature $\sigma$. The essential observation is that one  can choose a subset $X' \subseteq X$  such that both $X'$ and its image $f(X')$ have signature $\sigma$. 
-Indeed, for  each orbit in the image of $f$, we can  choose an orbit of same dimension in its preimage. By completeness of the annotation, we can find distinguished subsets equivalent to $X'$ and its image in the annotation.
+Indeed, for  each orbit in the image of $f$, we can  choose an orbit of same dimension in its preimage. By completeness of the annotation, we can find distinguished subsets which are Morley equivalent to $X'$ and its image in the annotation.
 \end{proof}
 
     Define two sets of morphisms in $\Cc$:
@@ -290,7 +290,7 @@ By definition, the image of the inner restriction is contained in $Y'$, and the 
         \]
 in an annotation. Define the \emph{reduction} of this morphism to  the partial function of type $X \to Y$ that is obtained from $f$ by making it undefined on elements with image in the distinguished subset $Y'$. 
 \end{definition}
-By definition, the range of the reduction does not use any elements of the distinguished subset. Since the distinguished subset agrees with the image up to equivalence, it follows that the image of the reduction  has strictly smaller dimension than the image of $f$.  Therefore, we for reductions we will be able to apply the induction assumption. (There is a minor technical issue, which is that the reduction is a partial function, while we work with total functions. This issue will be resolved when we work with the reductions.) The following lemma shows that, when the annotation is strongly consistent, the orbit-infinity must manifest itself in the reductions. 
+By definition, the range of the reduction does not use any elements of the distinguished subset. Since the distinguished subset agrees with the image up to Morley equivalence, it follows that the image of the reduction  has strictly smaller dimension than the image of $f$.  Therefore, we for reductions we will be able to apply the induction assumption. (There is a minor technical issue, which is that the reduction is a partial function, while we work with total functions. This issue will be resolved when we work with the reductions.) The following lemma shows that, when the annotation is strongly consistent, the orbit-infinity must manifest itself in the reductions. 
 
 \begin{lemma}\label{lem:reductions-orbit-infinite}
     Let $\Cc$ be an orbit-finitely generated category which has an annotation $\Dd$ that is orbit-infinite and strongly consistent. Then the reduction of $\Dd$  is orbit-infinite. 

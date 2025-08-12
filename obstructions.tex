@@ -1,5 +1,7 @@
 \section{Obstructions}
 \label{sec:obstructions}
+If a monoid of functions is orbit-finite, then this has a finite witness, namely the  monoid itself, which can be computed from the generators in case it is orbit-finite. 
+The main technical result in this paper is that if a monoid of functions is orbit-infinite, then there is also a finite witness, which we call an obstruction, and define below.
 
 \newcommand{\fsfun}{\underset {\text{fs}} \longrightarrow}
 \newcommand{\smallfsfun}{\to_{\text{fs}}}
@@ -13,18 +15,21 @@
     \end{itemize}
     with the following properties:
     \begin{enumerate}
-        \item $f$ is the identity on fresh elements  of  $X$;
-        \item $f(x) \neq x$ and one of the following conditions holds: 
+        \item $f$ is the identity on fresh elements  of  $X$; and 
+        \item at least one of the following conditions holds: 
         \begin{enumerate}[(a)]
-            \item for some $x_1 \neq x_2 \in X$, $f(x_1) = f(x_2)$;
-            \item for some $x \in X$,  $\sup(x) \setminus \sup(f(x))$ contains an atom not in $S$.
-            \item for some $x \in X$, $f(x) \neq x$, but $f$ is the identity on fresh elements of the $S$-orbit of $f(x)$.
+            \item \label{item:merge-obstruction}
+             \textbf{non-injective}: for some $x \neq x' \in X$, $f(x) = f(x')$;
+            \item \label{item:lost-atom-obstruction}
+            \textbf{lost atom}: for some $x \in X$, there is an atom $a \notin S$ that is in the least support of $x$, but not in the least support of $f(x)$.
+            \item \label{item:one-time-move-obstruction} \textbf{one-time move}: for some $x \in X$, $f(x) \neq x$, but $f$ is the identity on fresh elements of the $S$-orbit of $f(x)$.
         \end{enumerate}
     \end{enumerate}
 \end{definition}
 
 
-In the above definition, there is a disjunction between items (a) and (b). Depending on which item is satisfied, we will speak of an obstruction of type (a) or (b). In principle, both types could hold at once.
+
+In the above definition, there is a disjunction between items \ref{item:merge-obstruction}, \ref{item:lost-atom-obstruction}, \ref{item:one-time-move-obstruction}. Depending on which item is satisfied, we will speak of an obstruction of type ``non-injective'', ``lost atom'' or ``one-time move''. In principle, an obstruction could have several types.
 
 The main technical result of this paper will be that obstructions are a necessary and sufficient condition for a monoid being orbit-infinite, as stated in the following theorem. 
 
@@ -34,28 +39,24 @@ The main technical result of this paper will be that obstructions are a necessar
     Then $M$ is not orbit-finite if and only if it has an obstruction.
 \end{theorem}
 
- Before discussing this further, let us give examples of both types of obstructions.
+ Before discussing this further, let us give examples  of obstructions.
  
 
-\begin{myexample}[Obstruction of type (a)] In this example, the domain $Q$ is the set $\atoms$ of all atoms, and the monoid consists of all finitely supported permutations. This monoid is orbit-infinite. Indeed, 
+\begin{myexample}[One-time move] In this example, the domain $Q$ is the set $\atoms$ of all atoms, and the monoid consists of all finitely supported permutations. This monoid is orbit-infinite. Indeed, 
 a finitely supported permutation can only move finitely many atoms, and the number of atoms moved in an orbit invariant, i.e.~two permutations that move different numbers of atoms are in different orbits.
 
-As we mentioned above, if a monoid is orbit-infinite, then it must have an obstruction. Here is the obstruction, which is of type (a), for this example. The support $S$ is empty, the function $f$ is a transposition of two atoms $a$ and $b$, and the argument $x$ is one of the transposed atoms, say $x=a$.  
+As we mentioned above, if a monoid is orbit-infinite, then it must have an obstruction. Here is the obstruction, which is of type ``one-time move'' for this example. The support $S$ is empty, the orbit is the full set,  and the function $f$ is a transposition of two atoms $a$ and $b$.
 \begin{enumerate}
-    \item   The first condition in the definition of an obstruction says  that $f$ is the identity on fresh elements in the $S$-orbit of $x$. In this case, this orbit is the entire domain $\atoms$. Since $f$ is a transposition, it is indeed the identity on fresh atoms. 
-    \item  The second condition says that $f(x) \neq x$, which is clearly true, and that $f$ is the identity on fresh elements in the $S$-orbit of $f(x)$. In this case, the $S$-orbit of $f(x)$ is again the entire domain $\atoms$, and we have already argued that $f$ is the identity on fresh elements there.  
+    \item   The first condition in the definition of an obstruction says  that $f$ is the identity on fresh elements in the $S$-orbit of $x$.  This is indeed the case, since $f$ does not move atoms which have a disjoint support with the support of $f$.
+    \item  For second condition, we show that item~\ref{item:one-time-move-obstruction} corresponding to ``one-time move'' is satisfied. The witnessing element $x$ is one of the two atoms $a$ and $b$ that are swapped. The orbit of its image is again the full set,  and we have already argued that $f$ is the identity on fresh elements there.  
 \end{enumerate}
-Summing up, in this example we have shown an orbit-infinite monoid which contains an obstruction of type (a).
+Summing up, in this example we have shown an orbit-infinite monoid which contains an obstruction of type ``one-time move''. Let us finish the example by explaining the intuition behind the name. The idea is that if take an $f$ as in the obstruction, and the witnessing argument $x$, then this argument will be moved by $f$, since it is not a fixpoint, but it will not be moved again if apply fresh copies of $f$. 
 \end{myexample}
 
 \begin{myexample}
-[Obstruction of type (b)] In this example, the domain $Q$ is $\atoms + 1$. The monoid consists of functions that map finitely many elements to $1$, and are the identity on the remaining elements. This monoid is isomorphic to the monoid of finite subsets of $\atoms$, with set union being the monoid operation. In particular, this monoid is orbit-infinite. 
+[Merge and lost atom] In this example, we show an obstruction that has two types at once, namely merge and lost atom. In this example, the domain $Q$ is $\atoms + 1$. The monoid consists of functions that map finitely many elements to $1$, and are the identity on the remaining elements. This monoid is isomorphic to the monoid of finite subsets of $\atoms$, with set union being the monoid operation. In particular, this monoid is orbit-infinite. 
 
-Here is an obstruction of type (b). The support $S$ is again empty. The function $f$ maps some atom $a$ to $1$, and is the identity otherwise. The argument $x$ is the atom $a$ that is mapped to $1$. We now show that this is an obstruction of type (b).
-\begin{enumerate}
-    \item The $S$-orbit of $x$ is the set $\atoms$, and $f$ is the identity on fresh elements of this orbit.  
-    \item When applying the function $f$ to $x$, the atom $a$ disappears from the support. 
-\end{enumerate}
+Here is an example of an obstruction for this monoid, which has both  types ``non-injective'' and ``lost atom''. The support $S$ is again empty. The set $X$ is the orbit $\atoms$.  The function $f$ maps two atoms $a \neq b$ to the set $1$, and is the identity otherwise. As in the previous example, it is easy to see that this function is the identity on fresh elements of $X$. The function is clearly non-injective on this set, which establishes the obstruction of type ``non-injective''. For the obstruction of type ``lost atom'', we observe that the atom $a$ is lost from the least support when applying $f$ to the argument $a$.
 \end{myexample}
 
 
@@ -82,138 +83,73 @@ We begin by proving soundness of obstructions.
     If $M$ has an obstruction, then it is not orbit-finite.
 \end{lemma}
 \begin{proof}
-    In the proof of the lemma, we use the following definition.
-    \begin{definition}
-        Let $S$ be a finite set of atoms.
-        Two objects with atoms $x$ and $y$ are called $S$-independent if 
-        \begin{align*}
-        \sup(x) \cap \sup(y) \subseteq S.
-        \end{align*}
-    \end{definition}
-    There are two types of obstructions, and therefore two proofs. However, in both proofs we use a common argument, which is contained in the following claim.
+Consider an obstruction, which consists of a set $S$, an $S$-orbit $X$, a function $f$, and one or two inputs from $X$, depending on the type of the obstruction (the non-injective type uses two input, and the remaining types use one input).
+In the proof, we will show that unbounded size supports are realized by composing many  copies of the function $f$, with each copy obtained by  applying some $S$-permutation to the original function. The following claim shows that functions obtained this way, and their compositions, will fix fresh elements of $X$.
 
-    \begin{claim}\label{claim:fresh-wrt-f}
-        Let $S$ be a finite support,  let  $X \subseteq Q$ be an $S$-orbit, and let $f : Q \to Q$ be a finitely supported function that is the identity on fresh elements of  $X$. Then 
-        \begin{align*}
-        \text{$x$ and $f$ are  $S$-independent}
-        \quad \Rightarrow \quad 
-        f(x)=x
-        \qquad \text{for every } x \in X.
-        \end{align*}
-    \end{claim}
-    \begin{proof}
-        In the proof, we will be interested in two subsets of $X$, namely the elements that satisfy the assumption
-                \begin{align}\label{eq:fresh-wrt-f}
-        \setbuild{ x \in X}{$x$ and $f$ are $S$-independent},
-        \end{align}
-        and the elements that satisfy the conclusion
-        \begin{align}
-        \label{eq:fixpoints-of-f}
-        \setbuild{x \in X}{$f(x)=x$}
-        \end{align}
-        We want to show that the first set is contained in the second one.
-    
-        Let $T$ be the union of the least supports of $f$ and $X$. 
-        The first observation is that the set~\eqref{eq:fresh-wrt-f} of elements from the assumption   is a single $T$-orbit.
-        Indeed, choose two elements in this set, call them $x_1$ and $x_2$. Since $X$ is a single $S$-orbit, we know that there is an $S$-permutation $\pi$ that maps $x_1$ to $x_2$. We want to show that $\pi$ can be improved so that it becomes a $T$-permuation. Indeed, this is the case, since by definition of the set in~\eqref{eq:fresh-wrt-f}, for both $x_1$ and $x_2$, each atom in the least support is either from $S$, or disjoint with $T$. Since we only care about what $\pi$ does to atoms in the least supports, we can choose $\pi$ so that it fixes $T$. 
-        
-        We now show that the subset~\eqref{eq:fresh-wrt-f} from the assumption has the same dimension as $X$. 
-        Let $d$ be the dimension of $X$, and choose some $x \in X$ that witnesses this dimension.  By Claim~\ref{claim:dimension-supports}, one cam improve this choice so that the least support of $x$ has $d$ atoms which are not in $T$, in particular $x$ witnesses that the set~\eqref{eq:fresh-wrt-f} has dimension $d$. 
-        
-        Since the set \eqref{eq:fresh-wrt-f} has the same dimension as $X$, we can use the assumption that $f$ is almost the identity on $X$ to conclude that there is at least one fixpoint of $f$ in the set~\eqref{eq:fresh-wrt-f}. However, the set of fixpoints~\eqref{eq:fixpoints-of-f} is supported by $T$, and so it is a union of $T$-orbits. It follows that the $T$-orbit from~\eqref{eq:fresh-wrt-f} is contained in the set of fixpoints~\eqref{eq:fixpoints-of-f}.
-    \end{proof}
-
-
-    Consider an obstruction, which consists of a set $X$, an element $x \in X$ and a function $f \in M$. Let $T$ be a finite set of atoms that supports all components of the obstruction, i.e.~$x, X,f$ and $M$. We can apply $S$-permutations to move this set into infinitely many disjoint places (up to the atoms $S$), i.e.~we can find infinitely many $S$-permutations $\pi_1,\pi_2,\ldots$ so that  
-    \begin{align*}
-    T_i \cap T_j \subseteq S \qquad \text{for every } i \neq j,
-    \end{align*}
-    where $T_i$ is defined to be the image of $T$ under $\pi_i$. Let us define $x_i$ and $f_i$ to be the images of $x$ and $f$ under $\pi_i$.  For the set $X$, there is no dependence on the permutation, since this set is supported by $S$, and the permutations fix this support. We will show that the set of functions 
-    \begin{align*}
-    \setbuild{ \myunderbrace{f_1; f_2; \cdots; f_i}{call this function $f_{1..i}$}}{ $i \in \set{1,2,\ldots}$}
-    \end{align*}
-    has unbounded supports, thus witnessing that $M$ is orbit-infinite. The main step will be proved in the following claim.
-    
-\begin{claim}
-    Let $i,j \in \set{1,2,\ldots}$. Then 
-    \begin{align*}
-    i > j
-    \quad \Leftrightarrow \quad
-    \text{$x_i$ is a fixpoint of } f_{1..j}.
-    \end{align*}
+\begin{claim}\label{claim:fixes-fresh-closure-properties}
+    Let $X$ be an $S$-orbit. The set of functions which fix fresh elements of $X$ is closed under: (a) applying $S$-permutations; and (b) composing functions. 
 \end{claim}
 \begin{proof}
-    We begin with the simpler implication $\Rightarrow$. If $i > j$, then the least support of $x_i$ is disjoint with the least supports of $f_1, f_2, \ldots, f_j$, except for the atoms from $S$. Therefore, we can use Claim~\ref{claim:fresh-wrt-f} to conclude that $x_i$ is a fixpoint of all  the functions $f_1,\ldots,f_j$, in particular it is a fixpoint of $f_{1..j}$.
+    Easy check.
 \end{proof}
-    By applying $S$-permutations to this obstruction, we can get infinitely many obstructions 
-        \begin{align*}
-        (f_1,x_1), (f_2,x_2),\ldots
-        \end{align*}
-    which are also obstructions, and such that for every $i \neq j$ the least supports of the pairs $(f_i,x_i)$ and $(f_j,x_j)$ intersect only on the atoms from $S$. Therefore, we can use the above claim to conclude that 
-    \begin{align*}
-    f_i(x_j) = x_j \qquad \text{for every } j \neq i.
-    \end{align*}
-    We will consider the function 
-    \begin{align*}
-    f_{1..i} \eqdef f_1 ; f_2 ; \cdots ; f_i.
-    \end{align*}
-    All elements $x_j$ with $j \geq i$ are fixpoints of this function. 
-    The rest of the proof diverges, depending on the type of obstruction.
 
-    \begin{claim}
-        For every $i,j \in \set{1,2,\ldots}$ we have 
-        \begin{align*}
-        i  < j 
-        \quad \Rightarrow \quad
-        \text{$x_i$ is a fixpoint of } f_1; f_2; \cdots; f_j. 
-        \end{align*}
-    \end{claim}
+We will prove that if we take $n$ functions $f_1,\ldots,f_n$ from the $S$-orbitg of $f$,  and these functions  are mutually fresh in the sense that their supports intersect only on atoms from $S$, then by composing them we will get a function that has  support of size at least $n$. This will prove that the monoid has unbounded supports, and therefore it is not orbit-finite. To prove that the support has at least $n$ elements, we will use the following sufficient condition, which only cares about fixpoints of the functions.
 
-    \begin{enumerate}[(a)]
-        \item[(b)] Suppose that the obstruction has type (b), which means that there is some atom in $x$ that does not appear in the least supports of $(f,x,X)$. 
-        
-        Consider an obstruction of type (b). In this obstruction, there is some atom in the least support of $x$ that is not present in the least support of $(f,M,X)$. 
-        \item     Consider an obstruction of type (a). In this obstruction, there is some function $f \in M$ and some input $x \in X$ such that the output $f(x)$ is still in $X$, but it is not equal to $x$. 
-        
-        Let $S$ be a finite set of atoms that supports both $X$ and $M$. If we apply an $S$-permutation to the pair $(f,x)$, then we get another obstruction of type (a), because the definition of obstructions does not refer to any individual atoms, only the monoid $M$ and the set $X$. More importantly, as stated in the following claim, if an $S$-permutation $\pi$ maps the support of $(f,x)$ to some fresh atoms (fresh with respect to $S$), then the function $\pi(f)$ in the new obstruction will be the identity on $x$. 
-        
-        \begin{claim}
-            Let $S$ be a support of $X$ and $M$, and let $T \supseteq S$ be a support of $f$ and $x$. 
-            Let $\pi$ be an atom permutation that fixes $S$, and such that 
-            \begin{align*}
-            \pi(T) \cap T =  S.
-            \end{align*}
-            Then $x$ is a fixpoint of $\pi(f)$. 
-        \end{claim}
-        \begin{proof}
-            Consider the $S$-orbit of $x$. By the 
-            This is because $x$ 
-        \end{proof}
-        We can choose infinitely many permutations 
-        \begin{align*}
-        \pi_1, \pi_2, \ldots
+\begin{claim}\label{claim:unbounded-supports-criterion}
+    Consider a function $f$ and let $X$ be a one-orbit set, such that: 
+    \begin{enumerate}
+        \item the function $f$ fixes fresh elements of $X$;
+        \item there exist  $x_1,\ldots,x_n \in X$ which are not fixed by $f$ such that 
+         \begin{align*}
+        \sup(x_i) \cap \sup(x_j) \subseteq \sup(X).
         \end{align*}
-        such that all of them fix the support $S$, but the 
-        We will show that there is an infinite set 
-        \begin{align*}
-        \set{x_1,x_2,\ldots} \subseteq X
-        \end{align*}
-        such that for every  
     \end{enumerate}
+    Then the least support of $f$ has at least $n$ atoms. 
+\end{claim}
+\begin{proof}
+    Let $T_i$ be the least support of $x_i$ minus the least support of $X$. By assumption, the sets $T_1,\ldots,T_n$ are pairwise disjoint. To prove the claim, we  will show that each of these sets contains at least one atom from the least support of $f$. 
+\end{proof}
 
+
+
+
+\paragraph*{Non-injective.}
+We begin with an obstruction of the non-injective type.
+Consider such an obstruction, which consists of a support $S$, an orbit $X$, a function $f$, and two inputs $x,x' \in X$ that are mapped by $f$ to the same output. In the $S$-orbit of the triple $(f,x,x')$, we  can find infinitely many triples
+    \begin{align*}
+    (f_1,x_1,x'_1), (f_2,x_2,x'_2), \ldots
+    \end{align*}
+which are mutually $S$-fresh in the following sense: 
+\begin{align*}
+\sup(f_i,x_i,x'_i) \cap \sup(f_j,x_j,x'_j) \subseteq S \qquad \text{for every } i \neq j.
+\end{align*}
+Thanks to the freshness assumption, we know that if we apply a function $f_i$ to an argument $x_j$ with $j \neq i$, then that argument will be a fixpoint. Similarly, $x'_j$ will be a fixpoint. In particular, if we take the composition $f_1 \cdots f_n$ of the first $n$ functions, then this function will merge the two inputs $x_i$ and $x'_i$ for every $i \in \set{1,\ldots,n}$. This is because the first $i-1$ functions will keep these arguments unchanged, then they will be merged by the $i$-th function, and the merge will persist after that. In particular, at least one of  the arguments $x_i,x'_i \in X$ is not fixed by  the composition $f_1 \cdots f_n$. Furthermore, by \cref{claim:fixes-fresh-closure-properties}, the function $f_1 \cdots f_n$ is fixes fresh elements of $X$. Therefore, we can apply \cref{claim:unbounded-supports-criterion} to conclude that this function has support of size at least $n$. 
+
+\paragraph*{Lost atom.} We now consider an obstruction of type ``lost atom'', which involves a function $f$ together with a single designated input $x$. As in the previous case, consider infinitely many pairs 
+\begin{align*}
+(f_1,x_1),(f_2,x_2), \ldots 
+\end{align*}
+from the $S$-orbit of $(f,x)$, which are mutually $S$-fresh. As in the previous case, we know that the composition $f_1 \cdots f_n$ is the identity on fresh elements of $X$. We will show, however, that this composition does not fix the elements $x_1,\ldots,x_n$, and therefore we can apply \cref{claim:unbounded-supports-criterion} to conclude that it has support of size at least $n$. To see this, consider an element $x_i$ with $i \in \set{1,\ldots,n}$. This function is fixed by the first $i-1$ function. Once the $i$-th function is applied, there is some atom $a \not \in S$ that is in the least  support of $x_i$, but is not in the least support of its image $f(x_i)$. Since this atom is $S$-fresh with respect to the remaining functions, it will never reappear in the support after applying them. Therefore, after applying all functions $f_1 \cdots f_n$, the atom $a$ will not be in the least support of the image of $x_i$. In particular, $x_i$ will not be fixed.
+
+\paragraph*{One-time move.} Finally, consider an obstruction of type one-time move, which is witnessed by some function $f$ and some argument $x$. Define $y = f(x)$. As in the previous case, consider infinitely many pairs 
+\begin{align*}
+(f_1,x_1,y_1),(f_2,x_2,y_2), \ldots 
+\end{align*}
+in the $S$-orbit of $(f,x,y)$ which are mutually $S$-fresh. 
+We know that these functions, and their compositions, fix fresh elements of the orbit $X$. By the definition of a one-time move obstruction, we can also draw a similar conclusion about the $S$-orbit of $y$, call it $Y$. Therefore, using the same argument as in the previous cases, we can conclude if we take the composition $f_1 \cdots f_n$, then it will $x_i$ to $y_i$ for $ \in \set{x_1,\ldots,x_n}$. This is because the first $i-1$ functions will fix $x_i$, the $i$-th one will move it to $y_i$, and the remaining functions will fix $y_i$. (This is the reason why the obstruction is called a one-time move.) Hence, we can apply \cref{claim:unbounded-supports-criterion} to conclude that the support of $f_1 \cdots f_n$ is at least $n$.
 \end{proof}
 
 \subsection{Deciding orbit-finiteness}
 \label{sec:deciding-monoids}
 A corollary of the above theorem is that we can decide if a deterministic orbit-finite automaton is equivalent to an orbit-finite monoid. 
+
 \begin{corollary}
     \label{cor:decide-orbit-finite-submonoids}
     The following problem is decidable: 
     \begin{enumerate}
         \item \textbf{Input.} An orbit-finite set $Q$, and an orbit-finite subset 
-        \begin{align*}
-        \Sigma \subseteq Q \fsfun Q.
-        \end{align*}
+        $
+        \Sigma \subseteq Q \smallfsfun Q.$
         \item \textbf{Question.} Is the monoid generated by $\Sigma$ orbit-finite?
     \end{enumerate}
 \end{corollary}
@@ -241,23 +177,37 @@ A corollary of the above theorem is that we can decide if a deterministic orbit-
         \begin{lstlisting}
 	def obstruction(X, f):
 
-	  # check condition 1 in the definition of an obstruction
-      I = $\emptyset$ # the set of non-fixpoints
-      for x in X:
-        if f(x) $\neq$ x:
-           I = I $\cup$ $\{$x$\}$
-      if dim(I) == dim(X): 
-        return False # f is not almost the identity on X
+      def idonfresh(X,f):
+         # check if f is the identity on fresh elements of X 
+        I = $\emptyset$ # the set of non-fixpoints
+        for x in X:
+          if f(x) $\neq$ x:
+             I = I $\cup$ $\{$x$\}$
+        return dim(I) == dim(X)
+
+      # check condition 1 in the definition of an obstruction 
+      if !idonfresh(X,f):
+        return False # not an obstruction
 
       # check condition 2 in the definition of an obstruction
-      for x in X: 
-        if f(x) $\in$ X $\setminus$ $\{$x$\}$:
-          return True # obstruction of type (a)
 
-        if sup(x) $\setminus$ sup(f(x), X, M) $\neq$  $\emptyset$:
-          return True # obstruction of type (b)
+      # type (a): non-injective
+      for x,x$'$ in X: 
+        if f(x) == f(x$'$) 
+          return True 
     
-      return False # no obstruction found
+      # type (b): lost atom
+      for x in X:
+        if sup(x) $\setminus$ sup(f(x) $\subsetneq$ sup(X):
+          return True 
+
+      # type (c): one-time move
+      Y = orbit(f(x), sup(X))  # compute the orbit of f(x)
+      if idonfresh(Y,f):
+         return True
+
+      # if all three types fail, then not an obstruction
+      return False
         \end{lstlisting}
     This program inputs two orbit-finite objects, and returns a Boolean.
     As shown in~\cite[Theorem 11.2]{bojanczyk_slightly2018}, the program above, like any program in its programming language, can be executed in finite time, given a representation of its input. 		
