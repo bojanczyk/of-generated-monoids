@@ -1,0 +1,383 @@
+\section{Completeness}
+\label{sec:completeness-of-obstructions}
+
+\subsection{The induction paramter}
+\label{sec:induction-parameter}
+Define the  \emph{signature} of an orbit-finite set $X$ is the pair consisting of its dimension and degree. The completeness of obstructions will be proved by induction on the maximal signature of objects in the category: 
+\begin{center}
+    \textbf{Induction parameter:} the maximal signature of objects in the category.
+\end{center}
+
+ We order signatures lexicographically, with the dimension more important than the degree. This is a well-founded order, and hence it can be used for an induction.  Also, the induction  parameter for a category  is well-defined, i.e.~for each orbit-finitely generated category the maximal signature is defined. This is because the set 
+of possible signatures is finite, as shown in the following lemma.
+
+\begin{lemma}
+    An orbit-finitely generated category has finitely many signatures of objects.
+\end{lemma}
+\begin{proof}
+The set of objects is orbit-finite, and the map which computes the signature of a set is equivariant. Therefore, the set of possible signatures is orbit-finite. Since signatures do not contain any atoms, this means that the set of signatures is finite.    
+\end{proof}
+
+
+
+
+
+
+\paragraph*{Induction base.}
+We finish this section with a proof of the induction base. Technically speaking, the induction base is for signature $(0,1)$, i.e.~then all images are finite sets of size one. In this case, a morphism is nothing but a choice of an element in the target object, and clearly there are orbit-finitely many ways to define such morphisms. Therefore, obstructions are complete in this case for vacuous reasons, namely that the category is necessarily orbit-finite and there is no need to use obstructions. 
+A similar argument works when the dimension is $0$, but the degree is any finite number, as shown in the following lemma. 
+\begin{lemma}\label{lem:induction-basis}
+        If the induction parameter uses dimension $0$, and any degree $n$, then the category is necessarily orbit-finite, and therefore the obstructions are complete.
+\end{lemma}
+\begin{proof}
+    A set of signature $(0,n)$ is a finite set with $n$ elements. Therefore, every generator has a finite image, which has at most $n$ elements. Consider a morphism along with a decomposition into generators
+    \begin{align*}
+     f = f_1; \cdots ; f_n.     
+    \end{align*}
+    This morphism is uniquely determined by two pieces of information: (a) the first generator $f_2$; and (b) what the composition $f_2;\cdots ; f_n$ of the remaining generators does to the at most $n$ atoms in the image of $f_1$. This information can be chosen in orbit-finitely many ways. 
+\end{proof}
+
+
+\paragraph*{Reductions.}
+The rest of this section is devoted to proving the induction step in the completeness result from \cref{lem:completeness-of-obstructions}.
+Thanks to \cref{lem:induction-basis}, when proving the induction basis we can assume that the dimension is nonzero in the induction parameter.
+
+Our completeness proof will have several stages. In each stage, we reduce the problem to a special case, where more assumptions are available. We begin by presenting the formal notion of reduction that is used in each stage.
+
+\begin{definition}
+    Consider an orbit-finitely generated category $\Cc$. An orbit-finitely generated  category $\Dd$ is called a \emph{reduction of $\Cc$} if:
+    \begin{enumerate}
+          \item \label{item:reduction-orbinf} \textbf{orbit-infinity pushes forward}: if $\Cc$ is orbit-infinite, then so is $\Dd$;
+        \item\label{item:reduction-obstruction} \textbf{obstructions pull back}: if $\Dd$ has an obstruction, then so does $\Dd$.
+    \end{enumerate}
+\end{definition}
+
+The notion of reduction is designed to ensure that if obstructions are complete in $\Dd$, then they are complete in $\Cc$. 
+By definition, reductions compose, i.e.~a reduction of a reduction is also a reduction. Our ultimate goal is to show that if a category is orbit-infinite, then either it has an obstruction, or otherwise it reduces to a category with a smaller induction parameter. This will prove the induction step. 
+
+
+\subsection{Subpolynomial sets}
+\label{sec:subpolynomial}
+In the first stage of reductions, we reduce to categories that use subpolynomial sets, see \cref{def:subpolynomial} below. These are sets like $\atoms^{(d)}$ in which the atoms are ordered, in contrast to sets like $\atoms \choose d$ in which the atoms are not ordered.  Sets of the latter kind have internal symmetries that pose difficulties with choice, which will be problematic in some of our constructions.  It turns out that such symmetries are irrelevant to our problem at hand, and can be reduced away. 
+
+
+The following definition describes the desirable sets, i.e.~those that do not have internal symmetries. 
+\begin{definition}[Subpolynomial sets]
+    \label{def:subpolynomial}
+    A \emph{subpolynomial\footnote{Sometimes, such sets are called straight. We use the name subpolynomial, because they are isomorphic to finitely supported subsets of polynomial orbit-finite sets as defined in~\cite[Section 1]{bojanczyk_slightly2018}.} set}  is any set of the form
+    \begin{align*}
+    (\atoms \setminus S)^{(d_1)} + \cdots + (\atoms \setminus S)^{(d_n)} \qquad \text{for $d_1,\ldots,d_n \in \set{0,1,\ldots}$ and finite $S \subseteq \atoms$.}
+    \end{align*}
+\end{definition}
+
+The following lemma shows that we can reduce the completeness proof to the special case where all sets are subpolynomial. 
+
+\begin{lemma}\label{lem:subpolynomial}
+    Every orbit-finitely generated category has a reduction that is subpolynomial and has the same induction parameter. 
+\end{lemma}
+\begin{proof}
+The essential idea is to lift orbit-finite sets to subpolynomial ones in a finitely ambiguous way, as described in the following claim.
+\newcommand{\subpol}{\mathsf{S}}
+    \begin{claim}
+            To every orbit-finite set $X$, one can associate a subpolynomial set $\subpol X$, called its \emph{lifting}, and  a surjective function 
+            \begin{align*}
+            s : \subpol X \to X
+            \end{align*}
+            such that every inverse image $s^{-1}(x)$ is finite.  Both $\subpol X$ and the function $s$ are supported by the least support of $X$.
+    \end{claim}
+    \begin{proof}
+        It is enough to prove the claim for one-orbit sets. Suppose that $X$ is a one-orbit set, of dimension $d$. Define 
+        \begin{align}\label{eq:definition-of-lifting}
+        \subpol X  
+        \quad \eqdef \quad  (\atoms \setminus \sup X)^{(d)}.
+        \end{align}
+        Observe that this definition is a unique construction that does not make any choices, which means that the function $X \mapsto \subpol X$ is an equivariant function which maps orbit-finite sets to other orbit-finite sets. 
+        
+        Unlike the set $\subpol X$, the function $s$ will no longer be unique, since its definition will involve some arbitrary choices. 
+        To define the function $s$, pick some $x \in X$. Since $X$ has one orbit, every element witnesses its dimension,  and therefore its least support consists of atoms $a_1,\ldots,a_d$ that are not in the support $\sup X$, plus some other atoms that are in the support. Define the function $s$ to consist of pairs
+        \begin{align*}
+         \pi(a_1,\ldots,a_d) \mapsto \pi(x),
+        \end{align*}
+        ranging over permutations $\pi$ which fix the support $\sup X$. This is indeed a function, since $x$ is supported by $\sup X$ plus the input atoms $a_1,\ldots,a_d$, and therefore one cannot find two outputs for the same input. By definition, the function is supported by $\sup X$, and it is also surjective, since every element in $X$ is of the form $\pi(x)$ for some $\pi$ that fixes the least support of $X$, by the assumption that $X$ is a one-orbit set.
+    \end{proof}
+
+    Let us repeat the comments from above proof: the lifting $\subpol X$ of the set is defined uniquely, see~\eqref{eq:definition-of-lifting}, while the  map $s$ is not defined uniquely.
+    We now extend lifting from sets to functions. Unlike for sets, a function might have several possible liftings.  Consider a commuting diagram of the form 
+    \[
+    \begin{tikzcd}
+    \subpol X \arrow[r,"g"] \arrow[d,"s_X"'] & \subpol Y \arrow[d,"s_Y"] \\
+    X \arrow[r,"f"'] & Y,
+    \end{tikzcd}
+    \]
+    where the functions $s_X$ and $s_Y$ are surjective functions supported by the least supports of $X$ and $Y$, respectively. If such a diagram exists, then we say that $g$ is a \emph{lifting} of $f$. Although a function might have several liftings, the ambiguity is finite, as shown in the following claim.
+
+\begin{claim}\label{claim:liftings-finite}
+    Every function $f : X \to Y$ has at least one, but finitely many,  liftings. 
+\end{claim}
+\begin{proof}
+    Consider a diagram which witnesses a potential lifting $g$. There are finitely many ways to choose the functions $s_X$ and $s_Y$. This is because these functions are required to be supported by $\sup X$ and $\sup Y$, respectively, and once we fix a support there are finitely many functions with that support.  Therefore, it is enough to show that once we have fixed these functions, there is at least one, but at most  finitely many, ways of choosing  $g$. Suppose that $g$ is supported by a set of atoms $S$. Pick some representatives $x_1,\ldots,x_n$ of all $S$-orbits in the input set $\subpol X$.  For each representative $x_i$, we need to choose some $g(x_i)$ is consistent with the commuting diagram. In other words, we need to choose an element from the inverse image of $g(x_i)$ under $s_Y$. This inverse image is nonempty and finite, and therefore the choice can be made in one of a finite number of ways. 
+\end{proof}
+
+Consider a category $\Cc$ that is orbit-finitely generated, and let $\Dd$ be the category where objects and morphisms are liftings of, respectively,  objects and morphisms in $\Cc$. To complete the proof of the lemma, we will show that $\Dd$ is a reduction. 
+
+We first prove that $\Dd$ is orbit-finitely generated. For this, we use the following observation: if we compose two morphisms 
+\begin{align*}
+X \stackrel{f} \to Y \stackrel{g} \to Z
+\end{align*}
+in the category $\Cc$, 
+then every lifting of the composed morphism can be obtained by composing some lifting of $f$ with some lifting of $g$. Therefore, every lifting of a morphism in $\Cc$ can be obtained by composing liftings of generators in $\Cc$.  In other words, liftings of generators of $\Cc$ for a generating set for the lifted category $\Dd$. This generating set is orbit-finite, since each morphism from $\Cc$ has a finite number of liftings by  \cref{claim:liftings-finite}, and an  orbit-finite union of finite (even orbit-finite) sets is orbit-finite.
+
+We now prove that orbit-infinity of $\Cc$ pushes forward to orbit-infinity of $\Dd$. This is immediate, since each morphism has at least one lifting, and two different morphisms in $\Cc$ cannot have the same lifting. 
+
+Finally, we prove that obstructions pull back. (bla bla)
+\end{proof}
+
+
+
+\subsection{Morley surjective morphisms}
+\label{sec:almost-surjective-morphisms}
+In the second stage of reductions, we reduce to categories where all morphisms are surjective, up to Morley equivalence. This is captured by the following definition:  a function $f : X \to Y$ is \emph{Morley surjective} if its image $f(X)$ is Morley equivalent to the co-domain $Y$. The following lemma shows that we can reduce to categories where all morphisms are Morley surjective. This stage of the reduction is somewhat independent of the first stage (about subpolynomial objects), and the reductions could be performed in either order. 
+
+
+\begin{lemma}
+\label{lem:almost-surjective-reduction}
+    Every orbit-finitely generated category  has a reduction such that either:
+    \begin{enumerate}[(a)]
+        \item \label{item:almost-surjective-reduction-ind} the  induction parameter is the same and all morphisms  are Morley surjective; or
+        \item \label{item:almost-surjective-reduction-strict} the induction parameter is strictly lower.
+    \end{enumerate}
+    If the original category was subpolynomial, then so is the reduction.
+\end{lemma}
+\begin{proof}
+    Let $\Cc$ be the category.
+    Apply first the FFT Lemma, yielding a reduction of $\Cc$ which has the same induction parameter, and which has one orbit of objects. Therefore, from now on, we assume that $\Cc$ has one orbit of objects. The following claim shows that Morley surjective paths are exactly those that are composed from Morley surjective generators.
+    \begin{claim}\label{claim:almost-surjective-composition}
+        If the  category $\Cc$ has one orbit of objects, then 
+        \begin{enumerate}
+            \item[0.] morphisms that are not Morley surjective are closed under composition; and
+            \item[1.] morphisms that are  Morley surjective are closed under composition.
+        \end{enumerate}
+    \end{claim}
+    \begin{proof}
+        We begin with item 0, which is the only one where we use the assumption that there is on orbit of objects.           This assumption tells us that all objects have the same signature, since the signature is invariant under atom permutations. The main observation is that the signature can only drop when applying morphisms:
+                \begin{subclaim}\label{subclaim:signature-drop}
+            If $f : X \to Y$ is a finitely supported function, then the signature of its image $f(X)$ is at most the signature of its domain $X$.
+        \end{subclaim}
+Since all objects have the same signature, the above observation shows that once we have a path in the category which uses at least one morphism that is not Morley surjective, then the path itself will not be Morley surjective, since the maximal signature will never be recovered. (We have shown a slightly stronger conclusion, namely that the set of morphisms that is not Morley surjective is a two-sided ideal: it is closed under composition with all other morphisms.)
+
+We now prove item 1, where we do not use the assumption on having one orbit of objects. For this item, the main observation is that Morley equivalence is a congruence with respect to taking images under finitely supported functions.
+\begin{subclaim}
+    Let $f : X \to Y$ be a finitely supported function. If subsets $X_1,X_2 \subseteq X$ are Morley equivalent, then the same is true for their images $f(X_1),f(X_2)$.
+\end{subclaim}
+    Thanks to the above observation, if we compose two morphisms that are Morley surjective, then the image of the first one will be Morley equivalent to the domain of the second one, and therefore, the image of the composition will be Morley equivalent to the co-domain of the second one. 
+    \end{proof}
+
+    Thanks to the above claim, if we restrict the category $\Cc$ to morphisms that are not Morley surjective, then we get a category, call it $\Cc_0$ (formally speaking, we need to add the identity morphisms). Also, if we restrict to morphisms that are Morley surjective, then again we get a category $\Cc_1$. The category $\Cc_1$ is orbit-finitely generated, namely by the generators that are Morley surjective. At this stage, we do not know if $\Cc_0$ is orbit-finitely generated.  
+    
+    \begin{claim}
+        If $\Cc_1$ is orbit-infinite, then it is a reduction of $\Cc$.
+    \end{claim}
+    \begin{proof}
+     As we have remarked above $\Cc_1$ is orbit-finitely generated. Condition~\ref{item:reduction-orbinf} from  the definition of reductions, about pushing orbit-infinity forward,  holds because both categories are orbit-infinite. Condition~\ref{item:reduction-obstruction}, about pulling obstructions back, holds because $\Cc_1$ is a sub-category of $\Cc$.    
+    \end{proof}
+
+    By the above claim, if $\Cc_1$ is orbit-infinite, then we have one of the two conclusion of the lemma, since all morphisms in $\Cc_1$ are Morley surjective (we get the first or second conclusion depending on whether the induction parameter drops). Therefore, from now on we assume that  $\Cc_1$ is orbit-finite.  Using this assumption, we can prove that $\Cc_0$ is orbit-finitely generated, which is something that we did not know so far.
+
+    \begin{claim}
+        If $\Cc_1$ is orbit-finite, then $\Cc_0$ is orbit-finitely generated.
+    \end{claim}
+    \begin{proof}
+        Let $\Gamma$ be the generators which are not Morley surjective. 
+        Every path in $\Cc_0$ can be obtained by composing morphisms from $\Cc_1$ and generators from $\Gamma$, provided that at least one generator from $\Gamma$ is used. Therefore, an orbit-finite set of generators is 
+        \begin{align*}
+        \Gamma \cup \Gamma \cdot \Cc_1 \cup \Cc_1 \cdot \Gamma.
+        \end{align*}
+    \end{proof}
+    
+    In the category $\Cc_0$, for all morphisms, the signature of the image is strictly smaller than the signature of objects in the category. (All objects have the same signature, since there is one orbit of objects.) In the second stage of the proof, we will propose a reduction of $\Cc_0$ where the signature of the objects will match the signature of the images, and therefore it will be strictly smaller.  This is done by simply restricting the objects to images of morphisms, as in the following category, which we call $\Dd$:
+\begin{itemize}
+    \item Objects are pairs $(X,X')$ where $X$ is an object of $\Cc_0$, and $X' \subseteq X$ is the image of some generator of $\Cc_0$ that has target object $X$.
+    \item  Morphisms between objects $(X,X')$ and $(Y,Y')$ are functions of type $X' \to Y'$ which arise as follows. Take some morphism in $f : X \to Y$ in $\Cc_0$ which satisfies $f(X') \subseteq Y'$, and restrict it to the domain $X'$. Morphisms are composed as functions. 
+\end{itemize} 
+The morphisms defined above, composed as functions, are easily seen to be closed under composition. Therefore, $\Dd$ is a category. By definition, it has a strictly smaller induction parameter, since we use only images of morphisms that are not Morley surjective. To complete the proof of the lemma, it remains to show that this category is a reduction. 
+
+\begin{claim}
+    $\Dd$ is a reduction of $\Cc_0$.
+\end{claim}
+\begin{proof}
+    Let us first show that $\Dd$ is orbit-finitely generated. This is because it is generated by the morphisms which arise from generators of $\Cc_0$, which is not hard to show.
+
+    Let us now show condition~\ref{item:reduction-orbinf}, which says that if $\Cc_0$ is orbit-infinite, then so is $\Dd$. Thanks to Lemma~\ref{lem:bounded-supports}, this is the same as saying that if $\Cc_0$ has morphisms with supports of unbounded size, then the same is true for $\Dd$. Indeed, consider a path in $\Cc_0$ which composes to a morphism with a very large support. Decompose this path into generators
+    \begin{align*}
+    X_0 \stackrel {f_1} \longrightarrow 
+    X_1 \stackrel {f_2} \longrightarrow
+    \cdots 
+     \stackrel {f_n} \longrightarrow X_n.
+    \end{align*}
+    Let $X'_i$ be the image of the $i$-th generator.
+    We will be interested  $f_2 \cdots f_n$, i.e.~in the part of the path obtained by removing the first generator. The corresponding morphism must have very large support, since the first generator has a support of bounded size. Furthermore, this support remains large one we restrict the morphism to the image of the first morphism, since only this information about $f_2 \cdots f_n$ will contribute to the path $f_1 \cdots f_n$.  Finally, the image of the path $f_2 \cdots f_n$ is contained in the image of the last generator. Summing up, we have shown that the morphism
+    \begin{align*}
+    (X_1, \im f_1)\to (X_n,X'_n)
+    \end{align*}
+    in the category $\Dd$ which arises from $f_2 \cdots f_n$ has very large support. Therefore, $\Dd$ has unbounded supports. 
+
+    Finally, we need to show that obstructions in $\Dd$ can be pulled back to obstructions in $\Cc$. This is not hard to see. 
+\end{proof}
+
+This finishes the reduction from the lemma. Let us finally remark that all objects created in this reduction are subpolynomial, if the original objects were subpolynomial. This is because each object in the new category admits a bijection with a subset of an object in the original category, and subpolynomial sets are closed under taking subsets and applying bijections.
+\end{proof}
+
+
+
+\subsection{Morley equivalent morphisms}
+\label{sec:morely-equivalent-morphisms}
+
+We say that two functions  are \emph{Morley equivalent} if they are Morley equivalent when viewed as sets of pairs. A necessary condition is that the domains of the two functions are Morley equivalent. The next stage of our completeness proof is to ensure that all morphisms are Morley equivalent.
+
+\begin{lemma}\label{lem:morely-equivalent-morphisms}
+    Consider an orbit-finitely generated category $\Cc$ such that: 
+    \begin{enumerate}
+        \item all objects are subpolynomial; and
+        \item all morphisms are Morley surjective.
+    \end{enumerate}
+    Then there is a reduction which has the two properties above,  the same induction parameter,  and furthermore:
+    \begin{enumerate}
+        \item[3.] all morphisms are Morley equivalent.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Thanks to the FFT Lemma, we can reduce to the case when $\Cc$ has one orbit of objects, and therefore we make this assumption from now on. In the proof, we will be working with two operators on orbit-finite sets, called the core and closure, which are defined below. 
+
+    \begin{definition}[Core and closure]
+        Let $X$ be an orbit-finite set. 
+        \begin{itemize}
+            \item The \emph{core} of $X$, written as $\core X$,  is defined to be the elements $x \in X$ that witness the dimension, i.e.~$|\sup x \setminus \sup X|$ has the maximal value $\dim X$.
+            \item The \emph{closure} of $X$, written as $\bar X$, is defined to least equivariant set that contains $X$, i.e.~$\setbuild{ \pi(x)}{$x \in X$ and $\pi$ is an atom permutation}$.
+        \end{itemize}
+    \end{definition}
+    The closure is easily seen to be a closure operator, i.e.~it is monotone with respect to inclusion and applying it a second time does not add any elements. Also, if two sets are in the same orbit, then they have the same closure. In particular, since we assume that all objects in $\Cc$ are in the same orbit, it follows that they have the same closure. 
+
+    The core operator can equivalently be defined as the union of all orbits that are contained in $X$ and have maximal dimension. The core and closure commute  for subpolynomial sets, as shown in the following claim.
+
+    \begin{claim}\label{claim:core-closure-commute}
+        If $X$ is subpolynomial, then
+        $ \overline{\core X} = \core \overline X$.
+    \end{claim}
+    \begin{proof}
+        This is because both the core and closure have simple formulas in the case of subpolynomial sets. For the closure, we simply reinsert the missing atoms: 
+        \begin{align*}
+        \overline{
+            (\atoms \setminus S)^{(d_1)} + \cdots + (\atoms \setminus S)^{(d_n)}
+        } 
+        \quad = \quad 
+        \atoms^{(d_1)} + \cdots + \atoms^{(d_n)}.
+        \end{align*}
+        For the closure, we only keep the orbits that have maximal dimension $d_i$. These operations clearly commute with each other. 
+    \end{proof}
+    
+    \begin{myexample}
+            The above claim does not hold in general for orbit-finite sets.  The essential reason is that the closure can change the dimension for sets that are not subpolynomial. Consider for example the set 
+            \begin{align*}
+            \set{\john} \times \atoms + \atoms.
+            \end{align*}
+            If we take the core followed by the closure, we get $\atoms^{(2)} + \atoms$. If we take the closure followed by the core, we get $\atoms^{(2)}$.  The issue here is that there is the fixed coordinate with value $\john$, because of which the closure increases the dimension.  Subpolynomial sets do not have this issue. In fact,  this issue could be avoided by using a variant of subpolynomial sets with internal symmetries, similar to the representation theorem from~\cite[Theorem 4.18]{bojanczyk_slightly2018}. Therefore, the feature of subpolynomial sets that is important here is not the lack of internal symmetries. 
+    \end{myexample}
+
+    \begin{claim}\label{claim:equivariant-version}
+        Consider a Morely surjective function $f : X \to Y$ between two subpolynomial sets. Then there is a unique equivariant function
+        \begin{align*}
+        \bar f : \overline{ \core X} \to \overline{ \core Y}
+        \end{align*}
+         which is  Morley equivalent to $\bar f$.
+    \end{claim}
+    \begin{proof}(Sketch)
+        Define $\bar f$ so that it does to general elements the same thing that $f$ does to fresh elements.  Uniqueness of the function is because of the following observation: if $A$ is an equivariant set where all orbits have the same dimension, then two equivariant functions defined on $A$ are Morley equivalent if and only if they are equal.
+    \end{proof}
+
+    We can think of the function $f \mapsto \bar f$ from the above claim as a functor from our category, which maps each object $X$ to the set $\overline{ \core X}$, and maps each morphism to $\bar f$. This is easily seen to be functorial, i.e.~composing morphisms first and applying the functor later gives the same result as applying the functor first and composing later. The image of this functor is a monoid, i.e.~a category with one object, since all objects in the category are in the same orbit, and therefore $\overline {\core X}$ does not depend on the choice of $X$, thanks to \cref{claim:core-closure-commute}. Furthermore, this monoid is finite, since for every equivariant set, there are finitely many equivariant functions from that set to itself. Therefore, function from the above claim gives us a functor from our category to a finite monoid. By the FFT Lemma, one can extract an orbit-infinite sub-category which uses only one element of the monoid, and in this sub-category all morphisms are Morley equivalent to the same function $\bar f$, and therefore they are Morley equivalent to each other.
+\end{proof}
+
+
+
+
+\subsection{Finding a trap}
+\label{sec:trap-set}
+In this subsection, we present the last stage of the induction step in the completeness proof. The idea for this stage is based on the notion of traps, which are distinguished subsets of the objects that cannot be escaped by applying morphisms.
+
+\begin{definition}[Trap]
+    Define a \emph{trap} for an orbit-finitely generated category $\Cc$ to be  a finitely  supported function $T$, which maps each object $X$ in the category to a distinguished subset $TX \subseteq X$ such that
+    \begin{align*}
+    x \in X \quad \Rightarrow \quad f(x) \in TY \qquad \text{for every morphism $f : X \to Y$ in $\Cc$.}
+    \end{align*}
+\end{definition}
+
+We can extend a trap to morphisms, by restricting the domain and co-domain to the distinguished subsets. The resulting function is defined on all arguments, by definition of a trap. Furthermore, this extension to morphisms is compatible with composition of morphisms. Therefore, we can think of a trap as a functor, which we call the \emph{trap functor} of the trap.
+
+The trap functor describes what happens inside the distinguished subsets. There is also another functor, which we call the \emph{co-trap functor} and  denote by $T_\bot$, which  describes what happens outside the distinguished subsets. This functor maps a set $X$ to the set 
+\begin{align*}
+T_\bot X = (X \setminus TX) + \set{\bot},
+\end{align*}
+where $\bot$ is some atomless error element that represents the  distinguished subsets  squashed to a single point. For morphisms, the functor is defined in the natural way: the morphism $T_\bot f$ maps the squashed element to itself, and the remaining elements
+
+\begin{lemma}\label{lem:trap-co-trap}
+    Let $\Cc$ be an orbit-finitely generated category with a trap $T$. Then $\Cc$ is orbit-finite if and only if the same is true for its two images under the corresponding trap and co-trap functors.
+\end{lemma}
+\begin{proof}
+    The left-to-right implication is immediate, since applying a finitely supported functor can only decrease the number of morphisms in a category. Therefore, the rest of this proof is devoted to proving the right-to-left implication.
+
+    We begin the proof by rejecting an intuitive but wrong approach. One could think that a morphism $f$ in the original category is uniquely identified by its images under the trap functor and the co-trap functor. If this were true, then we would get the right-to-left implication, since the two images could only be chosen in orbit-finitely many ways. However, this is not true. The reason is both the trap and co-trap functors are insensitive to the information about how elements from outside the trap are moved into the trap. This information is something that will need to be addressed in the proof below, by showing that it can only be realised in orbit-finitely many ways.
+
+    For a morphism $f : X \to Y$ in the category $\Cc$, define its \emph{trap domain} to be the set of elements which are mapped to the distinguished subset $TY$. The trap domain of $f$ can be read from its image under the co-trap functor, by looking at the set of elements which are mapped to the error element.   Let $\Xx$ be the set of possible trap domains, ranging over all morphisms in $\Cc$. This is an orbit-finite family of sets, by the assumption that the image of the co-trap functor is orbit-finite. The following claim shows that such a family has a finite upper bound on the maximal length of strictly increasing chains.
+
+
+            \begin{claim}\label{claim:chains-bounded}
+            Let $\Xx$ be an orbit-finite family of orbit-finite sets. Then there is some finite upper bound $N$ on the maximal length of strictly increasing chains
+            \begin{align*}
+            X_1 \subsetneq X_1 \subsetneq \cdots \subsetneq X_n 
+            \qquad 
+            \text{where $X_1,\ldots,X_n \in \Xx$.}
+            \end{align*}
+        \end{claim}
+        \begin{proof}
+            Consider the function which maps a set $X \in \Xx$ to the maximal length of a strictly increasing chain which starts in $X$. This function has atom-less outputs, namely natural numbers, and therefore it can have only finitely many possible outputs on the orbit-finite family $\Xx$. 
+        \end{proof}
+
+        Consider a path $f_1  \cdots f_n$ in the category $\Cc$. Define a \emph{domain drop} for this path to be an index $i$ such that the trap domain of the prefix $f_1 \cdots f_{i-1}$ is different (and therefore strictly larger) than the trap domain of the prefix $f_1 \cdots f_i$. By \cref{claim:chains-bounded}, we know that there is a finite upper bound $N$ on the number of domain drops that can arise on any path in $\Cc$.
+
+       \begin{claim}
+                The morphism obtained by composing a path in the category $\Cc$ is uniquely determined by the following data:
+     \begin{enumerate}
+        \item the number  of domain drops in the reduction of the path;
+        \item the generators used by the path at indices that are domain drops;
+        \item the images under the trap functor and the co-trap functor  of the  segments of the path  between consecutive domain drops.
+     \end{enumerate}
+        \end{claim}
+        \begin{proof}
+            Between consecutive domain drops, the path cannot put an element into the distinguished subset which was not already put there previously in the path. Therefore, in a segment between consecutive domain drops, the images under the trap and co-trap functors store  all relevant information. 
+        \end{proof}
+
+
+    By Claim~\ref{claim:chains-bounded}, the number of domain drops in a path is uniformly bounded. It follows that the data in the above claim can be chosen in orbit-finitely many ways, and therefore the $\Cc$ is orbit-finite.
+\end{proof}
+
+The following lemma is our last stage in the induction step for the completeness proof. 
+\begin{lemma}\label{lem:trap-reduction}
+    Consider an orbit-finitely generated category $\Cc$, which is orbit-infinite. Then either $\Cc$ has an obstruction, or otherwise there is a reduction $\Dd$ with a trap $T$ such that 
+    \begin{enumerate}
+            \item\label{item:trap-reduction-morley-large} every object $X$ in $\Dd$ is  Morley equivalent to its distinguished subset $TX$; and 
+            \item\label{item:trap-reduction-morphisms-agree}
+             every two morphisms $f,g : X \to Y$ agree on the distinguished set $TX$.
+        \end{enumerate}
+\end{lemma}
+
+Before proving the lemma, we show how it gives us the induction step in the completeness proof. Indeed, consider an orbit-finitely generated category which is orbit-infinite. Apply the above lemma. If we find an obstruction, then we are done. Otherwise, let $\Dd$ and $T$ be the corresponding reduction and trap. By Lemma~\ref{lem:trap-co-trap}, if we take the image of $\Dd$ under the trap and co-trap functors, then at least one of these images must be orbit-infinite. This must be the image under the co-trap functor, since the image under the trap functor has exactly one morphism for each pair of objects thanks to item~\ref{item:trap-reduction-morphisms-agree}. By item~\ref{item:trap-reduction-morley-large}, the image under the co-trap functor has a strictly smaller induction parameter. Therefore, we can apply the induction assumption to find an obstruction. This obstruction pulls back to the original category, thus completing the proof of the induction step in the completeness lemma. 
+
+It remains to prove the above lemma. 
+
+\begin{proof}[Proof of Lemma~\ref{lem:trap-reduction}]
+    Thanks to \cref{lem:morely-equivalent-morphisms}, we can assume without loss of generality that: (1) all objects in $\Cc$ are subpolynomial; (2) all morphisms are Morley surjective; and (3) all morphisms in the same hom-set are Morley equivalent. Also, thanks to the FFT Lemma, we can furthere assume that: (4) there is one orbit of objects.
+
+    (now what??)
+\end{proof}
+
+

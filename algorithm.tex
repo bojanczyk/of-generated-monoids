@@ -1,0 +1,151 @@
+
+\section{Deciding obstructions}
+\label{sec:deciding-obstructions}
+
+Consider two finitely supported functions that have the same orbit-finite domain $X$. We say that the functions are  \emph{Morley equivalent} if they agree on  some subset $X' \subseteq X$ which is Morley equivalent to $X$. An equivalent description is that the functions, when seen as sets of pairs, are Morley equivalent.  A function is called \emph{surjective up to Morley equivalence} if it is Morley equivalent to a surjective function.
+
+\begin{lemma}
+    Let $d \in \set{0,1,\ldots}$, and let $\Cc$ be the category where objects are one-orbit sets of dimension $d$, and morphisms are  all finitely supported functions that are surjective up to Morley equivalence. There is a functor $F : \Cc \to \Ff$ into a finite category such that for  every two morphisms 
+    \[
+    \begin{tikzcd}
+    X \arrow[r,"f",bend left] \arrow[r,"g"', bend right] & Y 
+    \end{tikzcd}
+    \]
+    in the $\Cc$, 
+    $f$ and $g$  are Morley equivalent if and only if  $F(f) = F(g)$. \end{lemma}
+\begin{proof}
+    In the proof, we  use a characterization of one-orbit subsets in terms of group actions. Let  $G$ be a subgroup of the group of permutations of $\set{1,\ldots,d}$. We say that two tuples of length $d$   are equivalent modulo $G$ if one can be obtained from the other by permuting the coordinates according to some element of $G$.  We will be interested in sets of the form 
+    \begin{align*}
+    \atoms^{(d)} / G.
+    \end{align*}
+    Elements of such a set are non-repeating $d$-tuples of atoms, modulo the action of $G$. For example, if $G$ is the group of all permutations, then this set is the same as the family of sets of size exactly $d$. A characterisation from~\cite[Section 9.3]{bojanczyk2014automata}, see also~\cite[Theorem 4.18]{bojanczyk_slightly2018} for a more accessible treatment, says that 
+     every equivariant one-orbit set admits an equivariant bijection with a set of the form $\atoms^{(d)}/G$. This result extends straightforwardly to one-orbit sets which are finitely supported but not necessarily equivariant. In the extension, we simply disallow some elements from the support.
+     \begin{claim}\label{claim:one-orbit-set-characterisation}
+        For every  one-orbit set with least support $S$, there is an $S$-supported bijection with a set of the form 
+        \begin{align*}
+        (\atoms \setminus S)^{(d)}/G.
+        \end{align*}
+     \end{claim}
+    We use group $G$ is called the \emph{character} of the one-orbit set. Observe that the character also tells us the dimension, since we can read the set $\set{1,\ldots,d}$ by looking a permutation in $G$ (we do not identify groups up to isomorphism to do this). 
+    The following claims shows that the character is unique.
+    \begin{claim}
+        \label{claim:character-unique}
+        Every one-orbit set has a unique character.
+    \end{claim}
+    \begin{proof}
+        We need to show that if we take two different characters $G$ and $H$ of the same dimension, then there cannot be an $S$-supported bijection between 
+        \begin{align*}
+        (\atoms \setminus S)^{(d)}/G \quad \text{and} \quad (\atoms \setminus S)^{(d)}/H.
+        \end{align*}
+        To prove this, we will show: (*) if there is an $S$-supported  function from left to right, then $G$ is a subgroup of $H$. In the case of a bijection, we could apply (*) in both directions,  therefore the two groups would be equal. It remains to prove (*). Take some input $x$ in the set on the left. The output must be a tuple that uses the same atoms, since the function is supported by $S$, and therefore the output must be equal to $\sigma x$ for some permutation $\sigma$ of the coordinates. The output should not depend on the equivalence class of the input, i.e.~if we take two inputs that are equivalent modulo $G$, then the outputs should be equivalent modulo $H$. This means that $\sigma g x$ and $\sigma x$ should be equivalent modulo $H$ for every $g \in G$. This in turn means that $g \in H$, which proves (*).
+    \end{proof}
+
+
+
+    So far, we have defined the character for one-orbit sets. Let us now define it for functions between such sets.
+            Consider an almost surjective function $f : X \to Y$ between two one-orbit sets of dimension $d$. Apply \cref{claim:one-orbit-set-characterisation} to these sets, yielding bijections 
+        \begin{align}\label{eq:two-character-bijections}
+        X \simeq  (\atoms \setminus \sup X)^{(d)}/G
+        \qquad 
+        Y \simeq (\atoms \setminus \sup Y)^{(d)}/H,
+        \end{align}
+        which are supported by $\sup X$ and $\sup Y$, respectively.         Define the \emph{character} of the function $f$ to be the set 
+    \begin{align*}
+    \setbuild{ \sigma }{$\sigma$ is a permutation of $\set{1,\ldots,d}$ such that $
+    \myunderbrace{\sigma x}{$x$ is viewed as a $d$-tuple of atoms, using first  bijection from~\eqref{eq:two-character-bijections} } = 
+    \myoverbrace{f(x)}{$f(x)$ is viewed as a $d$-tuple of atoms, using second bijection from~\eqref{eq:two-character-bijections} }$ for some fresh $x \in X$} 
+    \end{align*}
+    The following claim, whose straightforward proof is left to the reader,  collects some basic properties of the character, including the fact that it is well-defined because it does not depend on the choice of bijections in~\eqref{eq:two-character-bijections}.
+
+    \begin{claim}
+        Let $f : X \to Y$ be an almost surjective function between two one-orbit sets, and consider two bijections as in~\eqref{eq:two-character-bijections}. Then 
+        \begin{itemize}
+            \item The character does not depend on the choice of bijections~\eqref{eq:two-character-bijections}.
+            \item The input group $G$ is a subgroup of the output group $H$.
+            \item The character is a coset of the group $G$ inside the group of permutations of $\set{1,\ldots,d}$.
+            \item If $f_1, f_2 : X \to Y$ have the same character, then they are Morley equivalent.
+        \end{itemize}
+    \end{claim}
+    \begin{proof}
+        For the first item, we observe that the bijections in~\eqref{eq:two-character-bijections} are unique, up to permutations of the coordinates. Such permutations do not affect the character. 
+        By Lemma~\ref{lem:large-subsets-fresh-elements}, there is some subset $Z \subseteq X$ which is Morley equivalent to $X$, and such that 
+        \begin{align*}
+d
+        \end{align*}
+        Choose some support $T$ that contains both supports of $X$ and $Y$. 
+    \end{proof}
+
+    Thanks to the above claim, we 
+    In principle the character is defined in terms of the bijections in~\eqref{eq:two-character-bijections}, but it is not hard to see that this is not the case. 
+    \begin{claim}
+        Fix a support $S$ and dimension $d$, and two subgroups $G$ and $H$ of the group of permutations of $\set{1,\ldots,d}$. 
+        is empty if $G$ is not a subgroup of $H$, and otherwise it admits a bijection with the set of cosets 
+        \begin{align*}
+        \setbuild{ H\sigma  }{$\sigma$ is a permutation of $\set{1,\ldots,d}$}
+        \end{align*}
+    \end{claim}
+    Consider two sets as in the above claim, which have the same support and dimension but possibly different groups, and  an $S$-supported function between them 
+    \[
+    \begin{tikzcd}
+    (\atoms \setminus S)^{(d)}{/G} \arrow[r,"f"] & 
+    (\atoms \setminus S)^{(d)}{/H}.
+    \end{tikzcd}
+    \]
+    Such a function can be chosen in finitely many ways, because there are only finitely many functions with given support between two orbit-finite sets. However, a stronger result holds, namely that the number of ways in which this function can be chosen does not depend on the size support $S$. Take some input to the function, which is some tuple $\bar a$ of atoms, modulo $G$. The output  must necessarily use the same atoms, and therefore the output is equal to $\sigma \bar a$ modulo $H$, where $\sigma$ is some permutation of the coordinates. Furthermore, we must have 
+    \begin{align*}
+        \myunderbrace{\bar a  \equiv g \bar a \mod G}{this is the same as $g \in G$}  
+        \qquad  \Rightarrow \qquad 
+        \myunderbrace{\sigma \bar a \equiv \sigma g \bar  a \mod H}{this is the same as $g \in H$}.
+    \end{align*}
+    Therefore, the function $f$ can only be defined if the input character $G$ is a subgroup of the output character  $H$.  The permutation $\sigma$ might not be unique, i.e.~there might be two permutations $\sigma_1$ and $\sigma_2$ that give the same function, i.e.~the output is equal to both $\sigma_1 \bar a$ and $\sigma_2 \bar a$. But this means 
+
+    The discussion above refers to equivariant sets, while we will be working with finitely supported, but not necessarily equivariant orbits. Therefore, we extend the characterisation to such sets. The change is very simple: we simply forbid atoms from some finite support in the tuples, as stated in the following definition.
+
+            \begin{definition}
+            Define a \emph{canonical orbit} to be a set of the form 
+            \begin{align*}
+            (\atoms \setminus S)^{(d)}_{/G} \quad \eqdef \quad  \text{non-repeating $d$-tuples in $\atoms \setminus S$, modulo $G$}
+            \end{align*}
+            for some finite support $S$, some dimension $d \in \set{0,1,\ldots}$ and some finite group $G$, which is a subgroup of permutations of $\set{1,\ldots,d}$. 
+        \end{definition}
+
+    The following claim shows that every one-orbit set contains a copy of a canonical orbit that is equivalent to it. Furthermore, the embedding of the copy is supported by the same atoms which are used in the definition of the canonical orbit.
+
+    \begin{claim}
+        For every one-orbit set $X$, there is some finite support $S$ and a function 
+        \begin{align*}
+        f : (\atoms \setminus S)^{(d)}_{/G} \to X
+        \end{align*}
+        which is supported by $S$, injective, and almost surjective.
+    \end{claim}
+\end{proof}
+\begin{proof}
+    Extend the set $X$ to an equivariant set $Y \supseteq X$. By .., the set $Y$ admits an equivariant bijection with a canonical orbit $\atoms^{(d)}_{/G}$.
+\end{proof}
+
+
+\begin{claim}\label{claim:equivalence-relation-finite-group}
+        There is a finite group $\Gg$ and a functor $F : \Dd \to \Gg$
+        such that two morphisms are equivalent under $\approx$ if and only if they have the same source/target objects, and the same image under $F$.
+    \end{claim}
+    \begin{proof}
+
+
+
+        \begin{subclaim}
+            For every one-orbit set $X$ of dimension $d$,  and every support $S$, there is some $T \supseteq S$ and an injective $T$-supported function 
+            \begin{align*}
+            f : X' \to X,
+            \end{align*}
+            such that $Y$ is a canonical $T$-orbit, and the image $f(Y)$ is  Morley equivalent to $X$. 
+        \end{subclaim}
+
+        \begin{definition}
+            Let $d \in \set{0,1,\ldots}$ and let $G$ be a subgroup of the group of permutations of $\set{1,\ldots,d}$. 
+            A one-orbit set has character $(d,G)$ if it is Morley equivalent to a set which admits a finitely supported bijection with 
+        \end{definition}
+
+
+        For every one-orbit set $X$, there is some finite support $S$, and an $S$-supported bijection 
+        (sketch) The group describes how the fresh atoms are moved around by the morphisms.
+    \end{proof}

@@ -1,2 +1,16 @@
 nonzero
 submonoid
+equivariant
+subpolynomial
+atomless
+liftings
+nonempty
+Subpolynomial
+functorial
+ICALP
+LIPIcs
+Dagstuhl
+CoRR
+hom-set
+hom-sets
+Imre

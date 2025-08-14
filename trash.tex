@@ -1,0 +1,76 @@
+
+
+\subsection{Consolidation}
+\label{sec:consolidation}
+
+
+
+Define a \emph{sub-monoid} of a category to be any sub-category that has one object.
+
+\begin{lemma}[Consolidation Lemma]
+    \label{lem:consolidation-lemma} Let $\Cc$ be an orbit-finitely generated category which is orbit-infinite. Then there is some finitely-generated sub-monoid that is orbit-infinite.
+\end{lemma}
+\begin{proof}
+     The following claim shows that we can assume, without loss of generality, that the category has one orbit of objects.
+    
+    \begin{claim}  There  is a sub-category $\Dd \subseteq \Cc$ which is orbit-finitely generated, orbit-infinite, and which has one orbit of objects.
+    \end{claim}
+    \begin{proof}
+    Apply the FFT Lemma to the functor which maps a morphism to the pair (orbit of source object, orbit of target object). This is a monoid homomorphism, and therefore there must be a sub-category that uses only one pair. This pair is necessarily on the diagonal, i.e.~the source orbit and target orbit are the same.
+    \end{proof}
+
+    Pick some object $X$ in the category $\Dd$. Every other object in $\Dd$ is of the form $\pi(X)$ for some atom permutation $\pi$. Since it is only important what $\pi$ does with the least support of $X$, and there are orbit-finitely many possibilities for what $\pi$ does, it follows that there is some orbit-finite set $\Pi$ of atom-permutations such that every object 
+
+    \[
+    \begin{tikzcd}
+    X \ar[r,"f"] & 
+    \pi(X) \ar[r,"\pi^{-1}"] 
+ & X
+    \end{tikzcd}
+    \]
+    \begin{claim}
+        If $\Cc$ is orbit-infinite, then 
+    \end{claim}
+\end{proof}
+
+
+\begin{definition}[Image restriction]
+    \label{def:image-restriction}
+\end{definition}
+
+It is not hard to see that the category described above is well-defined, i.e.~the set of morphisms is closed under composition, and it contains all identity functions. In principle, the image restriction depends on the choice of generators, but all properties that we will be interested in will be independent of the choice of generators.
+
+The following lemma shows it is enough to consider image restrictions when proving completeness of obstructions. 
+
+
+\begin{definition}
+    For an orbit-finite set $X$, define its \emph{core} to be the set
+    \begin{align*}
+\core X 
+\quad \eqdef \quad     \setbuild{ x \in X}{the $\sup(X)$-orbit of $x$ has dimension $\dim X$}
+    \end{align*}
+\end{definition}
+
+Morphism are triples
+\begin{align*}
+\myunderbrace{(X,X')}{source \\ object} 
+\qquad 
+\myoverbrace{\stackrel f \longrightarrow}{morphism  $f : X \to Y$ in $\Cc$} 
+\qquad 
+\myunderbrace{(Y,Y')}{target \\ object}
+\end{align*}
+such that  $f(X') \subseteq Y$. Here is a subtle point that is worth paying attention to: even  
+
+Formally speaking, a morphism is a triple consisting of: the source object $(X,X')$, the target object $(Y,Y')$, and a morphism $f : X \to Y$ in the original category. In particular, if we have two morphisms  $X \to Y$ in the original category which agree on $X'$, then they will be seen as different morphisms of the image restriction. Composition of morphisms is defined 
+
+These morphisms are easily seen to be closed under composition, and therefore  they include all identity morphisms, and therefore this is a category. There is also a natural forgetful functor 
+\begin{align*}
+F : \text{image restriction of $\Cc$} \to \Cc,
+\end{align*}
+which 
+
+
+
+\begin{lemma}\label{lem:orbit-finite-image-restriction}
+    Let $\Cc$ be an orbit-finitely generated category. Then $\Cc$ is orbit-finite if and only if the same is true for its image restriction. 
+\end{lemma}

@@ -1,0 +1,1 @@
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QFor every one-orbit set with least support \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, there is an \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-supported bijection with a set of the form \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
