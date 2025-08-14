@@ -1,1 +1,13 @@
 {"rule":"THE_SUPERLATIVE","sentence":"^\\QFor every one-orbit set with least support \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, there is an \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-supported bijection with a set of the form \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"IES_IZE","sentence":"^\\QIn the first stage of reductions, we reduce to categories that use subpolynomial sets, see \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q below.\\E$"}
+{"rule":"IES_IZE","sentence":"^\\QIn the second stage of reductions, we reduce to categories where all morphisms are surjective, up to Morley equivalence.\\E$"}
+{"rule":"IES_IZE","sentence":"^\\QThe following lemma shows that we can reduce to categories where all morphisms are Morley surjective.\\E$"}
+{"rule":"COMPOSE_FROM_OF","sentence":"^\\QThe following claim shows that Morley surjective paths are exactly those that are composed from Morley surjective generators.\\E$"}
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QSince we are working with the equality atoms, each element \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q of an orbit-finite set has a least support, which we denote by \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QThe notion of dimension makes sense for any atoms, at least as long as there are least supports (weaker assumptions would be enough as well).\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QMorley equivalence.\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QMorley equivalence is an equivalence relation.\\E$"}
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QIn other words, non-required atoms from the least support of the set \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q will not appear in least supports of its elements .\\E$"}
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QIn other words, non-required atoms from the least support of the set \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q will not appear in least supports of its elements.\\E$"}
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QSince \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is a one-orbit set, each element of it has the same size of least support, say \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QThanks to Claim \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, for each element \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, it least support has \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q required atoms, and the remaining atoms are not in the least support of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}

@@ -1,7 +1,7 @@
 \section{Completeness}
 \label{sec:completeness-of-obstructions}
-
-\subsection{The induction paramter}
+This section contains the heart of the paper, which is the completeness proof for obstructions: if an orbit-finitely generated category is orbit-infinite, then it must contain an obstruction. 
+\subsection{The induction parameter}
 \label{sec:induction-parameter}
 Define the  \emph{signature} of an orbit-finite set $X$ is the pair consisting of its dimension and degree. The completeness of obstructions will be proved by induction on the maximal signature of objects in the category: 
 \begin{center}
@@ -39,7 +39,7 @@ A similar argument works when the dimension is $0$, but the degree is any finite
 
 
 \paragraph*{Reductions.}
-The rest of this section is devoted to proving the induction step in the completeness result from \cref{lem:completeness-of-obstructions}.
+The rest of this section is devoted to proving the induction step in the completeness of obstructions.
 Thanks to \cref{lem:induction-basis}, when proving the induction basis we can assume that the dimension is nonzero in the induction parameter.
 
 Our completeness proof will have several stages. In each stage, we reduce the problem to a special case, where more assumptions are available. We begin by presenting the formal notion of reduction that is used in each stage.
@@ -129,7 +129,7 @@ then every lifting of the composed morphism can be obtained by composing some li
 
 We now prove that orbit-infinity of $\Cc$ pushes forward to orbit-infinity of $\Dd$. This is immediate, since each morphism has at least one lifting, and two different morphisms in $\Cc$ cannot have the same lifting. 
 
-Finally, we prove that obstructions pull back. (bla bla)
+Finally, we prove that obstructions pull back (is meant to be easy, but we can wait for the list of obstructions to be complete.)
 \end{proof}
 
 
@@ -284,7 +284,7 @@ We say that two functions  are \emph{Morley equivalent} if they are Morley equiv
     \end{myexample}
 
     \begin{claim}\label{claim:equivariant-version}
-        Consider a Morely surjective function $f : X \to Y$ between two subpolynomial sets. Then there is a unique equivariant function
+        Consider a Morley surjective function $f : X \to Y$ between two subpolynomial sets. Then there is a unique equivariant function
         \begin{align*}
         \bar f : \overline{ \core X} \to \overline{ \core Y}
         \end{align*}
@@ -375,7 +375,7 @@ Before proving the lemma, we show how it gives us the induction step in the comp
 It remains to prove the above lemma. 
 
 \begin{proof}[Proof of Lemma~\ref{lem:trap-reduction}]
-    Thanks to \cref{lem:morely-equivalent-morphisms}, we can assume without loss of generality that: (1) all objects in $\Cc$ are subpolynomial; (2) all morphisms are Morley surjective; and (3) all morphisms in the same hom-set are Morley equivalent. Also, thanks to the FFT Lemma, we can furthere assume that: (4) there is one orbit of objects.
+    Thanks to \cref{lem:morely-equivalent-morphisms}, we can assume without loss of generality that: (1) all objects in $\Cc$ are subpolynomial; (2) all morphisms are Morley surjective; and (3) all morphisms in the same hom-set are Morley equivalent. Also, thanks to the FFT Lemma, we can further assume that: (4) there is one orbit of objects.
 
     (now what??)
 \end{proof}
